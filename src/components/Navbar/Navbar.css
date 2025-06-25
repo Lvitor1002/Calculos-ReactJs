@@ -1,0 +1,179 @@
+.controleNavbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+
+    top: 0;
+    height: 110px;
+    width: 100%;
+    background: linear-gradient(to left, rgb(104, 0, 0), rgb(255, 72, 0)) ;
+}
+.controleNavbar h1{
+    color: white;
+    font-size: 3rem;
+    margin-right: 65px;
+
+}
+.controleNavbar h3{
+    color: rgba(255, 255, 255, 0.89);
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
+.controeImgIcone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 140px;
+    z-index: 1;
+    position: relative;
+    top: 28px;
+}
+.controeImgIcone img{
+    width: 80px;
+    height: 80px;
+    padding:10px;
+}
+.controeImgIcone .iconeSeta{
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.363);
+    cursor: pointer;
+    
+    height: auto; /* Mantém a proporção */
+    position: relative; /* Para o funcionamento do [FLUTUAR] */
+    animation: flutuar
+    1.5s         /* 2s de duração da animação */
+    ease-in-out/* início e fim suave, rápido no centro*/
+    infinite   /* Mantém em loop */
+    alternate; /* Mantém alternando - ajuda na suavidade */
+    left: 6px;
+    transition: 1s;
+}
+
+.controeImgIcone .iconeSeta:active{
+    transform: scale(1.4);
+    color: rgb(255, 0, 0);
+    transition-duration: 0s;
+}
+.controeImgIcone .iconeSeta:hover{
+    color: white;
+    transform: scale(1.09);
+    transition-duration: 0s;
+}
+@keyframes flutuar {
+    0%{
+        top: 15px;
+    }
+    100%{
+        top: 30px;
+    }
+}
+
+/*                  Menu                 */
+
+.opcoesBar{
+    width: 400px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    transition: 1550ms;
+    background-color:white ;
+    z-index: 1000;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Deve ser junto, como está: [opcoesBar.ativo] */
+.opcoesBar.ativo{
+    left: 0;
+    transition: 350ms;
+    padding-right: 70px;
+}
+
+.itens{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    list-style: none;
+    height: 60px;
+    width: 115%;
+    margin-top: 29px;
+}
+.itens a{
+    color: black;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
+
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    position: relative;
+    left: 10px;
+    transition: all 1s;
+}
+.itens a:hover{
+    color: rgb(255, 72, 0);
+    border-top: .5px solid  rgb(48, 48, 44);
+    box-shadow: 0px 3px 6px -3px rgba(248, 0, 0, 0.39);
+    transition-duration: .2s;
+}
+.itens a:active{
+    transform: scale(1.3);
+    color: rgb(255, 255, 255);
+    transition-duration: 0s;
+}
+
+.campoItens{
+    width: 100%;
+    
+}
+.campoIconeFechar{
+    width: 100%;
+    height:80px;
+    color: white;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    left: 29px;
+}
+.iconeFechar{
+    font-size: 3rem;
+    color: rgb(255, 72, 0);
+    margin-top: 20px;
+    transition: all .5s;
+}
+.iconeFechar:active{
+    transform: scale(1.3);
+    color: rgb(252, 208, 208);
+    transition-duration: 0s;
+}
+span{
+    width: 100%;
+}
+/* Overlay para fechar o menu ao clicar fora dele: */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.692);
+    z-index: 999;
+    display: none;
+}
+
+.opcoesBar.ativo + .overlay {
+    display: block;
+}
