@@ -18,7 +18,7 @@ export default function Navbar(){
         <div className="controleNavbar">
             <div className="controeImgIcone">
                 
-                <Link to='/'><img src="../../public/favicon.png" alt="Logo" /></Link>
+                <Link to='/'><img src="/favicon.png" alt="Logo" /></Link>
                 
                 <Link to="#" className="iconeSeta">
                     <LuArrowDownNarrowWide onClick={alternarSidebar}/>

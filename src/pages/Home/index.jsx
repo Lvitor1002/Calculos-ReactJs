@@ -19,7 +19,7 @@ export default function Home(){
 
 
             <div className="logo">
-                <img src="../../public/pexels.jpg" alt="Logo Image" />
+                <img src="/pexels.jpg" alt="Logo Image" />
             </div>
 
         </div>
