@@ -17,8 +17,8 @@ export const Sidebar = [
         classe: 'itens'
     },
     {
-        titulo: 'Aluguel X Financiamento',
-        rota: '/Aluguel-Financiamento',
+        titulo: 'Financiamento',
+        rota: '/Financiamento',
         icone: <BsCurrencyDollar />,
         classe: 'itens'
     },

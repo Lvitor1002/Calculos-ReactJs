@@ -177,3 +177,20 @@ span{
 .opcoesBar.ativo + .overlay {
     display: block;
 }
+
+@media screen and (max-width: 600px) {
+    .opcoesBar{
+        width: 320px;
+        height: 900px;
+        position: absolute;
+        left: -130%;
+    }
+    @keyframes flutuar {
+    0%{
+        top: 0px;
+    }
+    100%{
+        top: 10px;
+    }
+}
+}

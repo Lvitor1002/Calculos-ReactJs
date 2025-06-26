@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageBase from "./pages/PageBase";
 import Home from './pages/Home'
-import AluguelFinanciamento from "./pages/AluguelFinanciamento";
+import Financiamento from "./pages/Financiamento";
 
 export default function AppRoutes(){
     return(
@@ -11,7 +11,7 @@ export default function AppRoutes(){
 
                     <Route index element={<Home/>}></Route>
 
-                    <Route path="/Aluguel-Financiamento" element={<AluguelFinanciamento/>}></Route>
+                    <Route path="/Financiamento" element={<Financiamento/>}></Route>
                     
                 </Route>
             </Routes>
