@@ -180,7 +180,7 @@ span{
 
 @media screen and (max-width: 600px) {
     .controleNavbar h1{
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     .opcoesBar{
         width: 320px;
