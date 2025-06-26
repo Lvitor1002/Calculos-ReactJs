@@ -2,6 +2,7 @@
 import { Link } from 'react-router-dom'
 import './Home.css'
 export default function Home(){
+    
     return(
         <div className="controleHome">
             
@@ -11,7 +12,7 @@ export default function Home(){
                 <p>Nem toda conta precisa ser feita de cabeça.</p>
 
                 <div className="controleBtn">
-                    <Link to="/">
+                    <Link to="/Financiamento">
                         <button>Começe agora</button>
                     </Link>
                 </div>
