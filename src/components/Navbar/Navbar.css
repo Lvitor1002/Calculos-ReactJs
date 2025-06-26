@@ -186,11 +186,11 @@ span{
         left: -130%;
     }
     @keyframes flutuar {
-    0%{
-        top: 0px;
+        0%{
+            top: 0px;
+        }
+        100%{
+            top: 10px;
+        }
     }
-    100%{
-        top: 10px;
-    }
-}
 }
