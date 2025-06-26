@@ -18,7 +18,7 @@ export const Sidebar = [
     },
     {
         titulo: 'Aluguel X Financiamento',
-        rota: '/',
+        rota: '/Aluguel-Financiamento',
         icone: <BsCurrencyDollar />,
         classe: 'itens'
     },

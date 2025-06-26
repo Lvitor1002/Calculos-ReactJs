@@ -20,6 +20,7 @@ export default function Home(){
 
             <div className="logo">
                 <img src="/pexels.jpg" alt="Logo Image" />
+                <div className='linha'></div>
             </div>
 
         </div>

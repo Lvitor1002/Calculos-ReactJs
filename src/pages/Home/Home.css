@@ -7,26 +7,11 @@
 
     width: 100%;
     height: 771px;
-    background-color: #2c2c2c;
 }
 .logo img{
     width: 400px;
     opacity: 70%;
-    box-shadow: 0px 46px 43px -61px rgba(255, 255, 255, 0.514);
-}
-
-.titulo{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-direction: column;
-    gap: 30px;
-    width: 60%;
-    padding: 100px 10px;
-    color: white;
-    background: linear-gradient(to left,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.164));
-    border-radius: 20px;
-
+    
     height: auto; /* Mantém a proporção */
     position: relative; /* Para o funcionamento do [FLUTUAR] */
     animation: flutuar-2
@@ -39,12 +24,34 @@
 }
 @keyframes flutuar-2 {
     0%{
-        top: -10px;
+        top: -20px;
     }
     100%{
         top: 1px;
     }
 }
+.linha{
+    position: relative;
+    left: 25%;
+    bottom: 5px;
+    width: 250px;
+    height: .5px;
+    background-color: #2c2c2c00;
+    box-shadow: 135px -13px 75px 2px rgba(255, 255, 255, 0.61);
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 30px;
+    width: 60%;
+    padding: 100px 10px;
+    color: white;
+    background: linear-gradient(to left,rgba(255, 255, 255, 0),rgba(255, 255, 255, 0.034), rgba(255, 255, 255, 0.164));
+    border-radius: 20px;
+}
+    
 .titulo h1{
     font-size: 2rem;
     color: rgba(255, 255, 255, 0.842);
