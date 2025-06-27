@@ -188,6 +188,12 @@ span{
         position: absolute;
         left: -130%;
     }
+    .campoItens a{
+        font-size: 1.1rem;
+    }
+    .iconeFechar{
+        font-size: 2.5rem!important;
+    }
     @keyframes flutuar {
         0%{
             top: 0px;
