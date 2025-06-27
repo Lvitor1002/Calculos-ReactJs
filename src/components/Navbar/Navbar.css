@@ -82,6 +82,7 @@
     position: fixed;
     top: 0;
     left: -100%;
+    overflow-y: auto;
     transition: 1550ms;
     background-color:white ;
     z-index: 1000;
@@ -183,9 +184,7 @@ span{
         font-size: 1.5rem;
     }
     .opcoesBar{
-        overflow-y: auto;
         width: 320px;
-        position: fixed;
         left: -130%;
     }
     .itens{
