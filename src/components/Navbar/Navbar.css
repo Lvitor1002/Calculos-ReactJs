@@ -83,6 +83,7 @@
     top: 0;
     left: -100%;
     overflow-y: auto;
+    overflow-x: hidden;
     transition: 1550ms;
     background-color:white ;
     z-index: 1000;
