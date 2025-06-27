@@ -264,7 +264,7 @@ export default function Financiamento(){
 
                 <h2>Valor financiado: <span>R$ {valorFinanciado}</span></h2> 
 
-                <div className="campoResultado">
+                <div className="campoResultadoF">
                     
                     <h4>Lista de Parcelas</h4>
                     

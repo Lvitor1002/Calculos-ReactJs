@@ -12,7 +12,7 @@ export default function Aposentadoria(){
             
             <h1>Simulador de Aposentadoria</h1>
 
-            <form className="formulario" >
+            <form className="formulario">
                 
                 <div className="controleInputs">
 

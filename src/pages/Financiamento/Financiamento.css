@@ -128,7 +128,7 @@ label title{
     border-radius: 10px 0 10px 0;
     color: rgb(255, 72, 0);
 }
-.campoResultado{
+.campoResultadoF{
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
