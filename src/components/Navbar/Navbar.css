@@ -103,6 +103,7 @@
     height: 60px;
     width: 115%;
     margin-top: 29px;
+
 }
 .itens a{
     color: black;
@@ -134,7 +135,6 @@
 
 .campoItens{
     width: 100%;
-    
 }
 .campoIconeFechar{
     width: 100%;
@@ -188,12 +188,14 @@ span{
         position: absolute;
         left: -130%;
     }
-    .campoItens a{
-        font-size: 1.1rem;
+    .itens{
+        margin-top: 15px;
     }
-    .iconeFechar{
-        font-size: 2.5rem!important;
+    .itens a{
+        font-size: 1.2rem;
+        font-weight: normal;
     }
+    
     @keyframes flutuar {
         0%{
             top: 0px;
