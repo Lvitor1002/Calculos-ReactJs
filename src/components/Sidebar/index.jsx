@@ -24,7 +24,7 @@ export const Sidebar = [
     },
     {
         titulo: 'Aposentadoria',
-        rota: '/',
+        rota: '/Aposentadoria',
         icone: <ImAccessibility/>,
         classe: 'itens'
     },
