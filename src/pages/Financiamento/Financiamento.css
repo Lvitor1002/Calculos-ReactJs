@@ -225,7 +225,9 @@ tbody tr td{
         width: 100%;
     }
     .campoResultadoF{
-        width: 100%;
+        overflow-x: hidden;
+        width: 110%;
+        background-color: red;
     }
 
     .controleLista{
