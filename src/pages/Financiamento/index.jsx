@@ -1,5 +1,7 @@
 import './Financiamento.css'
 export default function Financiamento(){
+
+    
     return(
         <div className="controleFinanciamento">
             
@@ -60,7 +62,7 @@ export default function Financiamento(){
                 <div className="controle-btn-limpar">
                     
                     <select>
-                        <option selected value="">Formato Financimaneto</option>
+                        <option selected value="">Amortização</option>
                         <option value="sac">SAC</option>    
                         <option value="price">Price</option>    
                     </select>
@@ -97,20 +99,7 @@ export default function Financiamento(){
                                     <td>2</td>
                                     <td>25</td>
                                 </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>R$ 10,45</td>
-                                    <td>R$ 60,00</td>
-                                    <td>2</td>
-                                    <td>25</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>R$ 10,45</td>
-                                    <td>R$ 60,00</td>
-                                    <td>2</td>
-                                    <td>25</td>
-                                </tr>
+                                
                             </tbody>
 
                         </table>
