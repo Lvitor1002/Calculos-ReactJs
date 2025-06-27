@@ -168,7 +168,7 @@ export default function Financiamento(){
             <form className="formularioFinanciamento" onSubmit={processarCalculo}>
                 
 
-                <div className="controleEntradas">
+                <div className="controleEntradasF">
 
                     <label htmlFor="idValor">Valor (R$)</label>
                 
@@ -192,7 +192,7 @@ export default function Financiamento(){
                 </div>
                 
 
-                <div className="controleEntradas">
+                <div className="controleEntradasF">
                     
                     <label htmlFor="idEntrada">Entrada (R$)</label>
                     
@@ -209,7 +209,7 @@ export default function Financiamento(){
                 </div>
                 
 
-                <div className="controleEntradas">
+                <div className="controleEntradasF">
                     
                     <label htmlFor="idTaxaJuros">Taxa de Juros (%)</label>
                     
@@ -226,7 +226,7 @@ export default function Financiamento(){
                 </div>
                 
                 
-                <div className="controleEntradas">
+                <div className="controleEntradasF">
                     
                     <label htmlFor="idTempo">Tempo (anos)</label>
                     
