@@ -26,7 +26,7 @@ export default function Navbar(){
                 
             </div>
             <h1>Calculus Tech.</h1>
-            <div></div>
+            <div><h4>(Em desenvolvimento)</h4></div>
 
             {/*                 menu               */}
             <nav className={sidebar ? 'opcoesBar ativo' : 'opcoesBar'}>

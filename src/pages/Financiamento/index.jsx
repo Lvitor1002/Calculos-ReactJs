@@ -266,7 +266,7 @@ export default function Financiamento(){
 
                 <div className="campoResultado">
                     
-                    <h3>Lista de Parcelas</h3>
+                    <h4>Lista de Parcelas</h4>
                     
                     <div className="controleLista">
                         <table>
