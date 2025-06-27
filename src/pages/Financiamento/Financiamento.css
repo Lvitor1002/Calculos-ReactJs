@@ -21,6 +21,7 @@
     text-align: center;
     border-radius: 10px 10px 0 0;
     background: linear-gradient(to right,black,rgb(92, 26, 0));
+    transition: all .5s;
 }
 
 .formularioFinanciamento{
@@ -37,6 +38,7 @@
     padding: 50px 10px;
     margin-bottom: 50px;
     transition: all 1s;
+    
 }
 
 
@@ -183,6 +185,7 @@ tbody tr td{
     }
 }
 @media screen and (max-width: 1400px) {
+    
     .controle-btn-limpar{
         justify-content: center;
         flex-direction: column;
@@ -206,12 +209,27 @@ tbody tr td{
     }
 }
 @media screen and (max-width: 750px) {
+    .controleFinanciamento h1{
+        width: 100%;
+        top: 35px;
+
+    }
     .controle-btn-limpar{
         width: 100%;
     }
     .formularioFinanciamento h2{
         width: 100%;
         font-size: 1.2rem;
+    }
+    .formularioFinanciamento{
+        width: 105%;
+    }
+    .campoResultadoF{
+        width: 100%;
+    }
+
+    .controleLista{
+        width: 110%;
     }
     thead tr th{
         padding: 0px 5px;
