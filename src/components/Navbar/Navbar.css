@@ -183,9 +183,9 @@ span{
         font-size: 1.5rem;
     }
     .opcoesBar{
+        overflow-y: auto;
         width: 320px;
-        height: 900px;
-        position: absolute;
+        position: fixed;
         left: -130%;
     }
     .itens{
