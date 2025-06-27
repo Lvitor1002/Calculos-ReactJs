@@ -165,7 +165,7 @@ export default function Financiamento(){
             
             <h1>Simulador de financiamento</h1>
 
-            <form className="formulario" onSubmit={processarCalculo}>
+            <form className="formularioFinanciamento" onSubmit={processarCalculo}>
                 
 
                 <div className="controleEntradas">
