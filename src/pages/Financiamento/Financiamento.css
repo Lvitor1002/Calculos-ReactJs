@@ -225,12 +225,11 @@ tbody tr td{
         width: 100%;
     }
     .campoResultadoF{
-        overflow-x: hidden;
         width: 110%;
-        background-color: red;
     }
-
+    
     .controleLista{
+        overflow-x: hidden;
         width: 110%;
     }
     thead tr th{
