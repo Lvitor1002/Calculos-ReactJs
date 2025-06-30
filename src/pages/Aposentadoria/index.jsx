@@ -1,22 +1,27 @@
 
 import { useState } from 'react'
 import './Aposentadoria.css'
-// import Swal from 'sweetalert2'
+import Swal from 'sweetalert2'
 
 
 export default function Aposentadoria(){
 
     const [valoresInputs, setValoresInputs] = useState({
-        salarioMes: '',
-        valorInvestido: '',
-        porcentagemInvestimentoMes:'',
-        patrimonioDesejado: '',
-        idadeAtual:'',
-        idadeDesejadoAposentado:'',
-        rentabilidadeAnual:'',
-        gastoFuturoAposentado:'',
+        inputSalarioMes: '',
+        inputValorInvestido: '',
+        inputPorcentagemInvestimentoMes:'',
+        inputPatrimonioDesejado: '',
+        inputIdadeAtual:'',
+        inputIdadeDesejadoAposentado:'',
+        inputRentabilidadeAnual:'',
+        inputGastoFuturoAposentado:'',
     })
-    const [valorDisponivel,setValorConta] = useState('0.00')
+    const [heranca,setHeranca] = useState('')
+    const [rendaMensalAposentado,setRendaMensalAposentado] = useState('')
+    const [metaPatrimonio,setMetaPatrimonio] = useState(null)
+    const [metaRendaMensal,setMetaRendaMensal] = useState(null)
+
+
 
 
 
@@ -26,49 +31,130 @@ export default function Aposentadoria(){
 
         //Tratando as entradas 
 
-        const salarioMes = parseFloat(valoresInputs.salarioMes.replace(",","."))
-        const valorInvestido = parseFloat(valoresInputs.valorInvestido.replace(",","."))
-        const porcentagemInvestimentoMes = parseFloat(valoresInputs.porcentagemInvestimentoMes.replace(",",".")) / 100
-        const patrimonioDesejado = parseFloat(valoresInputs.patrimonioDesejado.replace(",","."))
-        const idadeAtual = parseInt(valoresInputs.idadeAtual.replace(",","."))
-        const idadeDesejadoAposentado = parseInt(valoresInputs.idadeDesejadoAposentado.replace(",","."))
-        const rentabilidadeAnual = parseFloat(valoresInputs.rentabilidadeAnual.replace(",",".")) / 100
-        const gastoFuturoAposentado = parseFloat(valoresInputs.gastoFuturoAposentado.replace(",","."))
+        const inputSalarioMes = parseFloat(valoresInputs.inputSalarioMes.replace(",","."))
+        const inputValorInvestido = parseFloat(valoresInputs.inputValorInvestido.replace(",","."))
+        const inputPorcentagemInvestimentoMes = parseFloat(valoresInputs.inputPorcentagemInvestimentoMes.replace(",",".")) / 100
+        const inputPatrimonioDesejado = parseFloat(valoresInputs.inputPatrimonioDesejado.replace(",","."))
+        const inputIdadeAtual = parseInt(valoresInputs.inputIdadeAtual.replace(",","."))
+        const inputIdadeDesejadoAposentado = parseInt(valoresInputs.inputIdadeDesejadoAposentado.replace(",","."))
+        const inputRentabilidadeAnual = parseFloat(valoresInputs.inputRentabilidadeAnual.replace(",",".")) / 100
+        const inputGastoFuturoAposentado = parseFloat(valoresInputs.inputGastoFuturoAposentado.replace(",","."))
+    
+        if(!inputSalarioMes || isNaN(inputSalarioMes) || inputSalarioMes <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Ganho Mensal(R$) incorreto..`,
+            })
+            return
+        }
+        if(!inputValorInvestido || isNaN(inputValorInvestido) || inputValorInvestido <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Valor Investido(R$) incorreto..`,
+            })
+            return
+        }
+        if(!inputPorcentagemInvestimentoMes || isNaN(inputPorcentagemInvestimentoMes) || inputPorcentagemInvestimentoMes <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para % Investimento incorreto..`,
+            })
+            return
+        }
+        if(!inputPatrimonioDesejado || isNaN(inputPatrimonioDesejado) || inputPatrimonioDesejado <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Patrimonio Desejado(R$) incorreto..`,
+            })
+            return
+        }
+        if(!inputIdadeAtual || isNaN(inputIdadeAtual) || inputIdadeAtual <= 0 || inputIdadeAtual >= 120){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Idade Atual incorreto..`,
+            })
+            return
+        }
+        if(!inputIdadeDesejadoAposentado || isNaN(inputIdadeDesejadoAposentado) || inputIdadeDesejadoAposentado <= 0 || inputIdadeDesejadoAposentado >= 120){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Idade Desejada para se Aposentar incorreto..`,
+            })
+            return
+        }
+        if(!inputRentabilidadeAnual || isNaN(inputRentabilidadeAnual) || inputRentabilidadeAnual <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Rentabilidade Anual(%) incorreto..`,
+            })
+            return
+        }
+        if(!inputGastoFuturoAposentado || isNaN(inputGastoFuturoAposentado) || inputGastoFuturoAposentado <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para Gasto Futuro Aposentado(R$) incorreto..`,
+            })
+            return
+        }
 
-
-       
-        valorContaAposentado(
-            valorInvestido,
-            salarioMes,
-            porcentagemInvestimentoMes,
-            idadeAtual,
-            idadeDesejadoAposentado,
-            rentabilidadeAnual
+        //Constante criada para usar como argumento em [metas]
+        const herancaCalculada = herancaAposentado(
+            inputValorInvestido,
+            inputSalarioMes,
+            inputPorcentagemInvestimentoMes,
+            inputIdadeAtual,
+            inputIdadeDesejadoAposentado,
+            inputRentabilidadeAnual
         );
+
+        //Constante criada para usar como argumento em [metas]
+        const rendaMensalCalculada = salarioAposentado(
+            herancaCalculada,
+            inputIdadeDesejadoAposentado,
+            inputRentabilidadeAnual,
+        )
+
+        metas(
+            inputPatrimonioDesejado, 
+            inputGastoFuturoAposentado, 
+            herancaCalculada, 
+            rendaMensalCalculada
+        )
 
         //Irá ser chamado apenas se o [gastoFuturoAposentado] for maior que o resultado estimado
         // metaGastoFuturoAposentado(gastoFuturoAposentado)
         
     }
     
-    //Valor em posse ao se aposentar 
-    function valorContaAposentado(
-        valorInvestido,
-        salarioMes,
-        porcentagemInvestimentoMes,
-        idadeAtual,
-        idadeDesejadoAposentado,
-        rentabilidadeAnual
+
+
+
+    //                          Valor em posse ao se aposentar 
+    function herancaAposentado(
+        inputValorInvestido,
+        inputSalarioMes,
+        inputPorcentagemInvestimentoMes,
+        inputIdadeAtual,
+        inputIdadeDesejadoAposentado,
+        inputRentabilidadeAnual
     ){
 
-        const totalMesesRestantes = (idadeDesejadoAposentado - idadeAtual) * 12
+        const totalMesesRestantes = (inputIdadeDesejadoAposentado - inputIdadeAtual) * 12
 
-        const taxaRetornoMensal = Math.pow(1+rentabilidadeAnual,1/12) - 1
+        const taxaRetornoMensal = Math.pow(1+inputRentabilidadeAnual,1/12) - 1
 
-        const aporteMensal = salarioMes * porcentagemInvestimentoMes
+        const aporteMensal = inputSalarioMes * inputPorcentagemInvestimentoMes
 
         //Valor futuro do investimento inicial
-        const VFInicial = valorInvestido * Math.pow(1+taxaRetornoMensal,totalMesesRestantes)
+        const VFInicial = inputValorInvestido * Math.pow(1+taxaRetornoMensal,totalMesesRestantes)
 
         //Valor futuro dos aportes mensais 
         const VFaportes = aporteMensal * 
@@ -76,23 +162,65 @@ export default function Aposentadoria(){
         
         const valorConta = VFInicial + VFaportes  
 
-        setValorConta(valorConta.toFixed(2))
+        setHeranca(valorConta.toFixed(2))
+
+        return valorConta
     }
 
-    // //Herança estimada 
-    // function herancaAposentado(salarioMes,idadeAtual){
-    //     alert(`foi`)
-    // }
 
-    // //Gasto aceito por mês 
-    // function salarioAposentado(salarioMes,idadeAtual){
-    //     alert(`foi`)
-    // }
 
-    // //Meta ultrapassada!
-    // function metaGastoFuturoAposentado(salarioMes,idadeAtual){
-    //     alert(`foi`)
-    // }
+
+
+    //                              Gasto aceito por mês 
+    function salarioAposentado(
+            patrimonioAcumulado,
+            inputIdadeDesejadoAposentado,
+            inputRentabilidadeAnual
+    ){
+        const expectativaVida = 85; 
+
+        //Calcula o período de APOSENTADORIA (não o tempo até aposentar)
+        const anosAposentadoria = expectativaVida - inputIdadeDesejadoAposentado 
+        const periodoMeses = anosAposentadoria * 12
+
+        //Taxa mensal real
+        const taxaRetornoMensal = Math.pow(1+inputRentabilidadeAnual,1/12) - 1
+
+        const gastoMensal = patrimonioAcumulado * (taxaRetornoMensal/(1 - Math.pow(1 + taxaRetornoMensal,-periodoMeses)))
+
+        setRendaMensalAposentado(gastoMensal.toFixed(2))
+        return gastoMensal
+    }
+
+
+
+
+    //                      Para Metas ultrapassadas ou não!
+    function metas(
+        inputPatrimonioDesejado, 
+        inputGastoFuturoAposentado, 
+        herancaCalc, 
+        rendaMensalCalc
+    ){
+
+        setMetaPatrimonio(null)
+        setMetaRendaMensal(null)
+
+        if(herancaCalc > inputPatrimonioDesejado){
+            const superado = herancaCalc - inputPatrimonioDesejado
+            setMetaPatrimonio(superado)
+        }
+
+
+        if(rendaMensalCalc > inputGastoFuturoAposentado){
+            const superado = rendaMensalCalc - inputGastoFuturoAposentado 
+            setMetaRendaMensal(superado)
+        }
+
+
+    }
+
+
 
     const formatarMoeda = (valor) => {
         return new Intl.NumberFormat('pt-BR',{
@@ -103,19 +231,27 @@ export default function Aposentadoria(){
         }).format(valor)
     }
 
+
+
+
     function limparCampos(){
         setValoresInputs({
-            salarioMes: 0,
-            valorInvestido: 0,
-            porcentagemInvestimentoMes:0,
-            patrimonioDesejado: 0,
-            idadeAtual:0,
-            idadeDesejadoAposentado:0,
-            rentabilidadeAnual:0,
-            gastoFuturoAposentado:0,
+            inputSalarioMes: '',
+            inputValorInvestido: '',
+            inputPorcentagemInvestimentoMes:'',
+            inputPatrimonioDesejado: '',
+            inputIdadeAtual:'',
+            inputIdadeDesejadoAposentado:'',
+            inputRentabilidadeAnual:'',
+            inputGastoFuturoAposentado:'',
         })
-        setValorConta('0.00')
+        setHeranca('')
+        setRendaMensalAposentado('')
+        setMetaPatrimonio(null)
+        setMetaRendaMensal(null)
     }
+
+
 
     return(
         <div className="controleAposentadoria">
@@ -135,10 +271,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idSalario' 
                         placeholder='5000,00'
-                        value={valoresInputs.salarioMes}
+                        value={valoresInputs.inputSalarioMes}
                         onChange={(e)=> setValoresInputs(prev => ({
                             ...prev,
-                            salarioMes: e.target.value
+                            inputSalarioMes: e.target.value
                         }))}
                     />
 
@@ -153,10 +289,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idInvestido' 
                         placeholder='10000,00'
-                        value={valoresInputs.valorInvestido}
+                        value={valoresInputs.inputValorInvestido}
                         onChange={(e)=>setValoresInputs(prev => ({
                             ...prev,
-                            valorInvestido: e.target.value
+                            inputValorInvestido: e.target.value
                         }))}
                     />
                 </div>
@@ -170,10 +306,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idPatrimonio'
                         placeholder='1 000 000,00'
-                        value={valoresInputs.patrimonioDesejado}
+                        value={valoresInputs.inputPatrimonioDesejado}
                         onChange={(e)=> setValoresInputs(prev => ({
                             ...prev,
-                            patrimonioDesejado: e.target.value
+                            inputPatrimonioDesejado: e.target.value
                         }))} 
                     />
                 </div>
@@ -186,10 +322,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idRendaInvestida' 
                         placeholder='10'
-                        value={valoresInputs.porcentagemInvestimentoMes}
+                        value={valoresInputs.inputPorcentagemInvestimentoMes}
                         onChange={(e)=>setValoresInputs(prev => ({
                             ...prev,
-                            porcentagemInvestimentoMes: e.target.value
+                            inputPorcentagemInvestimentoMes: e.target.value
                         }))}
                     />
                 </div>
@@ -202,10 +338,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idIdadeAtual' 
                         placeholder='32' 
-                        value={valoresInputs.idadeAtual}
+                        value={valoresInputs.inputIdadeAtual}
                         onChange={(e)=>setValoresInputs(prev=>({
                             ...prev,
-                            idadeAtual: e.target.value
+                            inputIdadeAtual: e.target.value
                         }))}
                     />
                 </div>
@@ -218,10 +354,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idIdadeAposentadoria' 
                         placeholder='65'
-                        value={valoresInputs.idadeDesejadoAposentado}
+                        value={valoresInputs.inputIdadeDesejadoAposentado}
                         onChange={(e)=>setValoresInputs(prev=>({
                             ...prev,
-                            idadeDesejadoAposentado:e.target.value
+                            inputIdadeDesejadoAposentado:e.target.value
                         }))}
                     />
                 </div>
@@ -234,10 +370,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idRentabilidade'
                         placeholder='5'
-                        value={valoresInputs.rentabilidadeAnual}
+                        value={valoresInputs.inputRentabilidadeAnual}
                         onChange={(e)=>setValoresInputs(prev=>({
                             ...prev,
-                            rentabilidadeAnual:e.target.value
+                            inputRentabilidadeAnual:e.target.value
                         }))} 
                     />
                 </div>
@@ -250,10 +386,10 @@ export default function Aposentadoria(){
                         type="number" 
                         id='idGastoPorMes' 
                         placeholder='9000,00'
-                        value={valoresInputs.gastoFuturoAposentado}
+                        value={valoresInputs.inputGastoFuturoAposentado}
                         onChange={(e)=>setValoresInputs(prev=>({
                             ...prev,
-                            gastoFuturoAposentado:e.target.value
+                            inputGastoFuturoAposentado:e.target.value
                         }))}
                     />
                 </div>
@@ -262,16 +398,49 @@ export default function Aposentadoria(){
                     
                     <button type='submit'>Calcular</button>
                     
-                    <button type='submit' onClick={limparCampos}>Limpar</button>
+                    <button type='button' onClick={limparCampos}>Limpar</button>
 
                 </div>
                 
 
                 <div className="campoResultado">
-                    <h3>Valor em posse ao se aposentar: <span>{valorDisponivel ? formatarMoeda(parseFloat(valorDisponivel)) : 'R$ 0,00'}</span></h3>
-                    <h3>Herança estimada: <span>0,00</span></h3>
-                    <h3>Gasto assegurado por mês: <span>0,00</span></h3>
-                    {/* <h3>Meta de pretenção de gasto por mês ultrapassada em: <span>215.300,00</span> Parabéns!</h3> */}
+
+                    <h3>Patrimônio acumulado estimado: 
+                        <span>
+                            {heranca ? formatarMoeda(parseFloat(heranca)) : 'R$ 0,00'}
+                        </span>
+                    </h3>
+
+                    {/* Exibir apenas se meta for ultrapassada */}
+                    {metaPatrimonio !== null && (
+
+                        <h3>Você superou sua meta de patrimônio em: 
+                            <span>{formatarMoeda(metaPatrimonio)} Reais. Parabéns!</span>
+                        </h3>
+                    )}
+                    
+
+                    <h3>Renda mensal assegurada:  
+                        <span>
+                            {rendaMensalAposentado ? formatarMoeda(parseFloat(rendaMensalAposentado)): 'R$ 0,00'}
+                        </span>
+
+                        <br />
+
+                        <p>(Baseado numa expectativaVida de 85 anos)</p>
+
+                    </h3>
+
+
+                    {/* Exibir apenas se meta for ultrapassada */}
+                    {metaRendaMensal !== null && (
+                        <h3>
+                            Você superou sua meta de renda mensal em: 
+                            <span>
+                                {formatarMoeda(metaRendaMensal)} Reais. Parabéns!
+                            </span>
+                        </h3>
+                    )}
                 </div>
 
             </form>

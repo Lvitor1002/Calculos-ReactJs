@@ -132,6 +132,10 @@ label title{
     padding: 20px;
     transition: all .5s;
 }
+.campoResultado p{
+    font-size: 1rem;
+    transition: all .5s;
+}
 .formulario h3{
     text-align: justify;
 
@@ -172,26 +176,52 @@ label title{
         text-align: center;
     }
 }
-
-@media screen and (max-width: 805px) {
+@media screen and (max-width: 1300px) {
     .controleAposentadoria{
-        height: 1600px;
+        height: 1700px;
+        
     }
-    .formulario h2{
-        width: 100%;
-        font-size: 1.2rem;
+    .campoResultado{
+        height: 700px;
     }
-    .formulario h3{
-        font-size: 1.3rem;
+    
+}
+
+@media screen and (max-width: 865px) {
+    .controleAposentadoria{
+        height: 1800px;
+        
+    }
+    .campoResultado{
+        height: 750px;
+    }
+    .formulario{
+
+        min-width: 98%;
+        
+    }
+    .controleAposentadoria h1{
+        min-width: 98%;
     }
     
     
 }
 @media screen and (max-width: 805px) {
     .controleAposentadoria{
-        height: 1800px;
+        height: 2000px;
+        
     }
-    
+    .campoResultado{
+        height: 850px;
+        width: 100%;
+    }
+    .formulario h2{
+        width: 100%;
+        font-size: 1.2rem;
+    }
+    .formulario h3{
+        font-size: 1.2rem;
+    }
     
     
 }
