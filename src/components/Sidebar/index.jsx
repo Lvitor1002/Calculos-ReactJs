@@ -29,14 +29,8 @@ export const Sidebar = [
         classe: 'itens'
     },
     {
-        titulo: 'Investimento Renda Fixa',
-        rota: '/',
-        icone: <VscGraph />,
-        classe: 'itens'
-    },
-    {
         titulo: 'Juros Composto',
-        rota: '/',
+        rota: '/jurosComposto',
         icone: <ImCalculator />,
         classe: 'itens'
     },
@@ -56,6 +50,12 @@ export const Sidebar = [
         titulo: 'Reserva Emergência',
         rota: '/',
         icone: <BsPiggyBankFill/>,
+        classe: 'itens'
+    },
+    {
+        titulo: 'Investimento Renda Fixa',
+        rota: '/',
+        icone: <VscGraph />,
         classe: 'itens'
     },
 ]
