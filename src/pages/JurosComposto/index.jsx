@@ -168,7 +168,7 @@ export default function JurosComposto(){
                         onChange={(e)=>setTipoTempo(e.target.value)}
                         >
                         <option value="ano">Anos</option>
-                        <option value="mes">Mensal</option>
+                        <option value="mes">Meses</option>
                     </select>
                 </div>
 
