@@ -197,6 +197,15 @@ label title{
     border-radius: 0px 0px 10px 10px;
 }
 
+.controleEntradasJuros select{
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 10px;
+    outline: none;
+    position: relative;
+    bottom: 50px;
+    left: 390px;
+}
 @media screen and (max-width: 1720px) {
     .controleJuros{
         height: 1600px;
@@ -254,6 +263,9 @@ label title{
     }
     .formularioJuros h3{
         font-size: 1.2rem;
+    }
+    .controleEntradasJuros select{
+        left: 220px;
     }
     
     

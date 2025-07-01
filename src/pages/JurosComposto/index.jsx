@@ -1,24 +1,105 @@
 
+import { useState } from 'react'
 import './JurosComposto.css'
 export default function JurosComposto(){
+
+    const [valoresInputs, setValoresInputs] = useState({
+        inputValorInicial:'',
+        inputValorMensal:'',
+        inputTaxaJuros:'',
+        inputPeriodo:'',
+    })
+
+    const [tipoTaxa, setTipoTaxa] = useState('ano') 
+    const [tipoTempo,setTipoTempo] = useState('ano')
+    const [valorTotalFinal,setValorTotalFinal] = useState('')
+    // const [totalInvestido,setTotalInvestido] = useState('')
+    // const [totalJuros,setTotalJuros] = useState('')
+
+    function processarCalculo(e){
+
+        e.preventDefault()
+
+        const valorInicial= parseFloat(valoresInputs.inputValorInicial.replace(",",".")) || 0
+        const valorMensal=parseFloat(valoresInputs.inputValorMensal.replace(",",".")) || 0
+        let taxaJuros=parseFloat(valoresInputs.inputTaxaJuros.replace(",",".")) / 100
+        let periodo=parseFloat(valoresInputs.inputPeriodo.replace(",",".")) || 0
+
+        // Converter período para meses se necessário
+        if(tipoTempo === 'ano'){
+            periodo = periodo * 12
+        }
+
+        // Converter taxa para mensal se necessário
+        if(tipoTaxa === 'ano'){
+            taxaJuros = taxaJuros / 12
+        }
+
+        const montante = calcularMontante(valorInicial, valorMensal, taxaJuros, periodo)
+
+        setValorTotalFinal(montante)
+
+    }
+
+
+    // Valor total final
+    function calcularMontante(valorInicial, valorMensal, taxaJuros, meses){
+
+        let montante = valorInicial
+
+        for(let i = 0; i < meses;i++){
+            montante = montante * (1 + taxaJuros)
+
+            montante += valorMensal
+        }
+        return montante.toFixed(2)
+
+    }
+
+    // Valor total investido R$28,90
+    // function calcularTotalInvestido(){
+        
+    // }
+
+    // Total em juros
+    // function calcularTotalJuros(){
+        
+    // }
+
+    function limparCampos() {
+
+        setValoresInputs({
+            inputValorInicial: '',
+            inputValorMensal: '',
+            inputTaxaJuros: '',
+            inputPeriodo: '',
+        })
+        setValorTotalFinal(0)
+    }
+
     return(
         <div className="controleJuros">
 
             <h1>Simulador de Juros Compostos</h1>
 
-            <form className="formularioJuros" >
+            <form className="formularioJuros" onClick={processarCalculo}>
                 
                 <div className="controleInputsJuros">
 
                 </div>
                 <div className="controleEntradasJuros">
 
-                    <label htmlFor="idSalario">Valor inicial (R$)</label>
+                    <label htmlFor="idValorInicial">Valor inicial (R$)</label>
                 
                     <input 
                         type="number" 
-                        id='idSalario' 
+                        id='idValorInicial' 
                         placeholder='5000,00'
+                        value={valoresInputs.inputValorInicial}
+                        onChange={(e=>setValoresInputs(prev => ({
+                            ...prev,
+                            inputValorInicial: e.target.value
+                        })))}
                     />
 
                 </div>
@@ -26,39 +107,69 @@ export default function JurosComposto(){
 
                 <div className="controleEntradasJuros">
                     
-                    <label htmlFor="idInvestido">Valor mensal (R$)</label>
+                    <label htmlFor="idValorMensal">Valor mensal (R$)</label>
                     
                     <input 
                         type="number" 
-                        id='idInvestido' 
+                        id='idValorMensal' 
                         placeholder='10000,00'
-                        
+                        value={valoresInputs.inputValorMensal}
+                        onChange={e=>setValoresInputs(prev => ({
+                            ...prev,
+                            inputValorMensal: e.target.value
+                        }))}
                     />
                 </div>
                 
 
                 <div className="controleEntradasJuros">
                     
-                    <label htmlFor="idPatrimonio">Taxa de juros (%)</label>
+                    <label htmlFor="idTaxaMensal">Taxa de juros (%) 
+                    </label>
                     
                     <input 
                         type="number" 
-                        id='idPatrimonio'
-                        placeholder='1 000 000,00'
-                        
+                        id='idTaxaMensal'
+                        placeholder='Ex: 1.5'
+                        value={valoresInputs.inputTaxaJuros}
+                        onChange={e=>setValoresInputs(prev=>({
+                            ...prev,
+                            inputTaxaJuros: e.target.value
+                        }))}
                     />
+                    <select 
+                        id="idTaxaMensal"
+                        value={tipoTaxa}
+                        onChange={e=>setTipoTaxa(e.target.value)}
+                        >
+                        <option value="ano">Anual</option>
+                        <option value="mes">Mensal</option>
+                    </select>
                 </div>
                 
                 <div className="controleEntradasJuros">
                     
-                    <label htmlFor="idRendaInvestida">Período</label>
+                    <label htmlFor="idPeriodo">Período</label>
                     
                     <input 
                         type="number" 
-                        id='idRendaInvestida' 
-                        placeholder='10'
+                        id='idPeriodo' 
+                        placeholder='Ex: 12'
+                        value={valoresInputs.inputPeriodo}
+                        onChange={e=>setValoresInputs(prev=>({
+                            ...prev,
+                            inputPeriodo: e.target.value
+                        }))}
                         
                     />
+                    <select 
+                        id="idPeriodo"
+                        value={tipoTempo}
+                        onChange={(e)=>setTipoTempo(e.target.value)}
+                        >
+                        <option value="ano">Anos</option>
+                        <option value="mes">Mensal</option>
+                    </select>
                 </div>
 
                 
@@ -67,22 +178,21 @@ export default function JurosComposto(){
                     
                     <button type='submit'>Calcular</button>
                     
-                    <button type='button' >Limpar</button>
+                    <button type='button' onClick={limparCampos}>Limpar</button>
 
                 </div>
                 
 
                 <div className="campoResultadoJuros">
 
-                    <h3>Valor total final: R$5.290,89
+                    <h3>Valor total final: R$<span> {valorTotalFinal}</span>
                     </h3>
 
-                    
 
-                    <h3>Valor total investido R$28,90  
+                    <h3>Valor total investido: R$0,00  
                     </h3>
 
-                    <h3>Total em juros R$5.261,99  
+                    <h3>Total em juros: R$0,00  
                     </h3>
 
                     
