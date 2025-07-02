@@ -48,3 +48,5 @@ Observações:
         SAC: A dívida cai de forma linear (mais rápido).
 
         PRICE: Redução mais lenta no início (prioriza pagamento de juros).
+
+
