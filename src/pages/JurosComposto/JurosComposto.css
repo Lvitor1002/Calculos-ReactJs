@@ -271,8 +271,8 @@ label title{
         bottom: 30px;
     }
     .controleEntradasJuros select{
-        left: 260px;
-        bottom: 47px;
+        left: 265px;
+        bottom: 45px;
     }
     
     .formularioJuros h2{
@@ -300,7 +300,7 @@ label title{
     }
     .controleListaJuros{
         height: 330px;
-        width: 330px!important;
+        width: 340px!important;
         border-radius: 0 0 10px 10px;
     }
 }
