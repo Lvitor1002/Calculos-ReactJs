@@ -53,7 +53,7 @@ export default function Financiamento(){
             })
             return
         }
-        if(!tempo || isNaN(tempo) || tempo <= 0){
+        if(!tempo || isNaN(tempo) || tempo <= 0 || tempo > 50){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",

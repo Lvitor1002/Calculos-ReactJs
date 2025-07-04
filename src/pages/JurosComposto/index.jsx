@@ -1,6 +1,9 @@
 
 import { useState } from 'react'
 import './JurosComposto.css'
+import Swal from 'sweetalert2'
+
+
 export default function JurosComposto(){
 
     const [valoresInputs, setValoresInputs] = useState({
@@ -26,15 +29,69 @@ export default function JurosComposto(){
         let taxaJuros=parseFloat(valoresInputs.inputTaxaJuros.replace(",",".")) / 100
         let periodo=parseFloat(valoresInputs.inputPeriodo.replace(",",".")) || 0
 
+        if(!valorInicial || isNaN(valorInicial) || valorInicial < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o valor inicial incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+        if(!valorMensal || isNaN(valorMensal) || valorMensal < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o valor mensal incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+        if(!taxaJuros || isNaN(taxaJuros) || taxaJuros < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para taxa juros incorreta.. Tente novamente.`,
+            })
+            return 
+        }
+        if(!periodo || isNaN(periodo) || periodo <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o periodo incorreto.. Tente novamente.`,
+            })
+            return 
+        }
         // Converter período para meses se necessário
         if(tipoTempo === 'ano'){
+            
+            if(periodo > 50){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Entrada para o período ultrapassou 50 anos.. Tente novamente.`,
+                })
+                return 
+            }
             periodo = periodo * 12
         }
+        else
+        {
+            if(periodo > 600){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Entrada para o período ultrapassou 600 meses.. Tente novamente.`,
+                })
+                return 
+            }
+        }
+
 
         // Converter taxa para mensal se necessário
         if(tipoTaxa === 'ano'){
             taxaJuros = taxaJuros / 12
         }
+
 
         const montante = calcularMontante(valorInicial, valorMensal, taxaJuros, periodo)
         setValorTotalFinal(montante)
@@ -123,9 +180,9 @@ export default function JurosComposto(){
             inputTaxaJuros: '',
             inputPeriodo: '',
         })
-        setValorTotalFinal(0)
-        setTotalInvestido(0)
-        setTotalJuros(0)
+        setValorTotalFinal("0.00")
+        setTotalInvestido("0.00")
+        setTotalJuros("0.00")
         setDadosTabela([])
     }
 
