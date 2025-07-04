@@ -36,7 +36,7 @@ export const Sidebar = [
     },
     {
         titulo: 'Juros Simples',
-        rota: '/',
+        rota: '/JurosSimples',
         icone: <RiPercentLine />,
         classe: 'itens'
     },

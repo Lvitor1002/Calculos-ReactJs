@@ -1,0 +1,310 @@
+
+.controleJurosSimples{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 1800px;
+    transition: all .5s;
+}
+
+.controleJurosSimples h1{
+    color: rgb(255, 72, 0);
+    font-size: 1.3rem;
+    position: relative;
+    top: 42px;
+    padding: 10px;
+    width: 60%;
+    min-width: 350px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(to right,black,rgb(92, 26, 0));
+}
+
+.formularioJurosSimples{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    flex-wrap: wrap;
+
+    width: 60%;
+    height: 95%;
+    min-width: 350px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px 10px;
+    margin-bottom: 50px;
+    transition: all 1s;
+}
+
+.formularioJurosSimples button{
+    padding: 5px 20px;
+    color: white; 
+    background: linear-gradient(to left, rgb(104, 0, 0), rgb(255, 72, 0)); 
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 2s;
+}
+.formularioJurosSimples button:hover{
+    border: .5px solid  rgb(255, 72, 0); 
+    background: transparent;
+    color: rgb(255, 72, 0); 
+    transition-duration: 1s;
+}
+.formularioJurosSimples button:active{
+    transform: scale(1.08);
+    color: white;
+    transition-duration: 0s;
+}
+.controleEntradasJurosSimples{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 100%;
+    min-width: 320px;
+    padding: 10px;
+    gap: 15px;
+    transition: all .5s;
+}
+.controleEntradasJurosSimples input{
+    outline: none;
+    color: black;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-top: .5px solid rgba(0, 0, 0, 0.116);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.315);
+    transition: all .5s;
+}
+.controleEntradasJurosSimples label{
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.589);    
+}
+.controleEntradasJurosSimples button{
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+}
+.btnsSimples{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 90%;
+}
+.controleEntradasJurosSimples label title{
+    color: red;
+}
+
+.formularioJurosSimples h2{
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    border: .5px solid rgb(245, 82, 0);
+    box-shadow: 0px 0px 15px -12px rgba(0, 0, 0, 0.219);
+}
+.formularioJurosSimples h2 span{
+    padding: 5px;
+    border-radius: 10px 0 10px 0;
+    color: rgb(255, 72, 0);
+}
+.campoResultadoJurosSimples{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    width: 85%;
+    
+    border-radius: 10px;
+    border-bottom: 2px solid rgb(255, 72, 0);
+    padding: 20px;
+    transition: all .5s;
+}
+.campoResultadoJurosSimples p{
+    font-size: 1rem;
+    transition: all .5s;
+}
+.formularioJurosSimples h3{
+    text-align: justify;
+
+    width: 110%;
+    min-width: 320px;
+    height: 100px;
+    padding: 30px 10px;
+    border-radius: 10px;
+    border: .5px solid rgba(245, 82, 0, 0.171);
+    box-shadow: 0px 0px 15px -12px rgb(0, 0, 0);
+    color: rgba(0, 0, 0, 0.616);
+    font-size: 1.5rem;
+    transition: all .5s;
+}
+.formularioJurosSimples h3:hover{
+    background: linear-gradient(to left, rgba(250, 119, 67, 0.24),white);
+    border: 0; 
+    border-left: .5px solid rgba(245, 82, 0, 0.308);
+    transform: scale(1.01);
+    transition-duration: 0s;
+    box-shadow: 0;
+}
+.formularioJurosSimples h3 span{
+    padding: 5px;
+    border-radius: 10px 0 10px 0;
+    color: rgb(255, 72, 0);
+}
+
+.controleListaJurosSimples{
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
+    width: 100%;
+}
+.controleListaJurosSimples table{
+    min-width: 320px;
+    border-radius: 10px;
+    border-top: .5px solid rgba(255, 72, 0, 0.336);
+    padding-top: 20px;
+}
+.controleperiodoSimples{
+    position: relative;
+    bottom: 30px;
+}
+/* fixo */
+.controleListaJurosSimples thead{
+    position: sticky;
+    top: 0;
+}
+.controleListaJurosSimples thead tr th{
+    width: 200px;
+    text-align: start;
+    background-color: rgb(255, 72, 0);
+    padding: 0px 10px;
+    border-radius: 10px 0px 10px 0;
+
+}
+.controleListaJurosSimples tbody tr td{
+    width: 200px;
+    text-align: start;
+    background-color: rgb(255, 237, 230);
+    padding: 10px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.controleEntradasJurosSimples select{
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 10px;
+    outline: none;
+    position: relative;
+    bottom: 50px;
+    left: 80%;
+    
+}
+@media screen and (max-width: 1720px) {
+    .controleJurosSimples{
+        height: 1600px;
+        
+    }
+    .formularioJurosSimples h3{
+        text-align: center;
+    }
+    .campoResultadoJurosSimples{
+        text-align: center;
+    }
+}
+@media screen and (max-width: 1300px) {
+    .controleJurosSimples{
+        height: 1700px;
+        
+    }
+    .campoResultadoJurosSimples{
+        height: 700px;
+    }
+    
+}
+
+@media screen and (max-width: 865px) {
+    .controleJurosSimples{
+        height: 1800px;
+        
+    }
+    .campoResultadoJurosSimples{
+        height: 750px;
+        
+        width: 100%;
+    }
+    .formularioJurosSimples{
+
+        min-width: 98%;
+        
+    }
+    .controleJurosSimples h1{
+        min-width: 98%;
+    }
+    .controleListaJurosSimples{
+        height: 330px;
+        width: 700px;
+    }
+    .controleListaJurosSimples table{
+        width: 100%;
+    }
+    .controleListaJurosSimples thead tr th{
+        font-size: 1rem;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .controleJurosSimples{
+        height: 100%;
+    }
+    
+    .controleperiodoSimples{
+        position: relative;
+        bottom: 30px;
+    }
+    .controleEntradasJurosSimples select{
+        left: 270px;
+        bottom: 50px;
+    }
+    
+    .formularioJurosSimples h2{
+        width: 100%;
+        font-size: 1.2rem;
+    }
+    .formularioJurosSimples h3{
+        font-size: 1.2rem;
+    }
+    
+    .formularioJurosSimples{
+        height: 80%;
+    }
+    .controleListaJurosSimples thead tr th{
+        width: 50px;
+        white-space: wrap;
+        padding: 10px 2px;
+        font-size: .7rem;
+        text-align: center;
+    }
+    .controleListaJurosSimples tbody tr td{
+        padding: 20px 2px;
+        font-size: .6rem;
+        text-align: center;
+    }
+    .controleListaJurosSimples{
+        height: 330px;
+        width: 340px!important;
+        border-radius: 0 0 10px 10px;
+    }
+}
