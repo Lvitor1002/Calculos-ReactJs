@@ -12,9 +12,10 @@ export default function JurosComposto(){
 
     const [tipoTaxa, setTipoTaxa] = useState('ano') 
     const [tipoTempo,setTipoTempo] = useState('ano')
-    const [valorTotalFinal,setValorTotalFinal] = useState('')
-    // const [totalInvestido,setTotalInvestido] = useState('')
-    // const [totalJuros,setTotalJuros] = useState('')
+    const [valorTotalFinal,setValorTotalFinal] = useState("0.00")
+    const [totalInvestido,setTotalInvestido] = useState("0.00")
+    const [totalJuros,setTotalJuros] = useState("0.00")
+    const [dadosTabela, setDadosTabela] = useState([])
 
     function processarCalculo(e){
 
@@ -36,18 +37,30 @@ export default function JurosComposto(){
         }
 
         const montante = calcularMontante(valorInicial, valorMensal, taxaJuros, periodo)
-
         setValorTotalFinal(montante)
+        
+        const totalInvestido = calcularTotalInvestido(valorInicial,valorMensal,periodo)
+        setTotalInvestido(totalInvestido.toFixed(2))
+        
+        // Total em juros
+        const tJuros = montante - totalInvestido
+        setTotalJuros(tJuros.toFixed(2)) 
+
+
+
+        //Dados Tabela
+        const dados = gerarDadosTabela(valorInicial,periodo,taxaJuros,valorMensal)
+        setDadosTabela(dados)
 
     }
 
 
     // Valor total final
-    function calcularMontante(valorInicial, valorMensal, taxaJuros, meses){
+    function calcularMontante(valorInicial, valorMensal, taxaJuros, periodo){
 
         let montante = valorInicial
 
-        for(let i = 0; i < meses;i++){
+        for(let i = 0; i < periodo;i++){
             montante = montante * (1 + taxaJuros)
 
             montante += valorMensal
@@ -56,15 +69,51 @@ export default function JurosComposto(){
 
     }
 
-    // Valor total investido R$28,90
-    // function calcularTotalInvestido(){
-        
-    // }
+    //Valor total investido 
+    function calcularTotalInvestido(valorInicial,valorMensal, periodo){
+        return valorInicial + valorMensal * periodo
+    }
 
-    // Total em juros
-    // function calcularTotalJuros(){
-        
-    // }
+
+
+
+    // Gerar dados para a tabela mês a mês
+    function gerarDadosTabela(valorInicial,periodo,taxaJuros,valorMensal){
+        let montante = valorInicial
+        let totalInvestido = valorInicial
+        let totalJurosAcumulado = 0
+        const dados = []
+
+
+        for(let mes = 1; mes <= periodo; mes++){
+    
+            // Calcula os juros do mês sobre o montante atual
+            const jurosMes = montante * taxaJuros
+            totalJurosAcumulado += jurosMes
+
+            // Atualiza o montante com os juros
+            montante = montante * (1 + taxaJuros)
+
+            // Adiciona o aporte mensal
+            montante += valorMensal
+
+            // Atualiza o total investido
+            totalInvestido += valorMensal
+
+            // Adiciona os dados do mês
+            dados.push({
+                mes: mes,
+                juros: jurosMes.toFixed(2),
+                totalInvestido: totalInvestido.toFixed(2),
+                totalJuros: totalJurosAcumulado.toFixed(2),
+                totalAcumulado: montante.toFixed(2)
+            })
+        }
+        return dados
+    }
+
+
+
 
     function limparCampos() {
 
@@ -75,6 +124,9 @@ export default function JurosComposto(){
             inputPeriodo: '',
         })
         setValorTotalFinal(0)
+        setTotalInvestido(0)
+        setTotalJuros(0)
+        setDadosTabela([])
     }
 
     return(
@@ -82,7 +134,7 @@ export default function JurosComposto(){
 
             <h1>Simulador de Juros Compostos</h1>
 
-            <form className="formularioJuros" onClick={processarCalculo}>
+            <form className="formularioJuros" onSubmit={processarCalculo}>
                 
                 <div className="controleInputsJuros">
 
@@ -147,7 +199,7 @@ export default function JurosComposto(){
                     </select>
                 </div>
                 
-                <div className="controleEntradasJuros">
+                <div className="controleEntradasJuros controleperiodo">
                     
                     <label htmlFor="idPeriodo">Período</label>
                     
@@ -189,10 +241,10 @@ export default function JurosComposto(){
                     </h3>
 
 
-                    <h3>Valor total investido: R$0,00  
+                    <h3>Valor total investido: R$<span> {totalInvestido}</span>  
                     </h3>
 
-                    <h3>Total em juros: R$0,00  
+                    <h3>Total em juros: R$<span> {totalJuros}</span> 
                     </h3>
 
                     
@@ -210,41 +262,16 @@ export default function JurosComposto(){
                             </thead>
 
                             <tbody>
-                                {/* {parcelas.map((parcela)=>(
-
-                                    <tr key={parcela.mes}>
-
-                                        <td>{parcela.mes}</td>
-                                        <td>{parcela.prestacao}</td>
-                                        <td>{parcela.amortizacao}</td>
-                                        <td>{parcela.juros}</td>
-                                        <td>{parcela.saldoDevedor}</td>
-
+                                {dadosTabela.map(dado =>(
+                                    <tr key={dado.tempo}>
+                                        <td>{dado.mes}</td>
+                                        <td>{dado.juros}</td>
+                                        <td>{dado.totalInvestido}</td>
+                                        <td>{dado.totalJuros}</td>
+                                        <td>{dado.totalAcumulado}</td>
                                     </tr>
-                                ))} */}
+                                ))}
 
-                                <tr>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                </tr>
-                                <tr>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                </tr>
-                                <tr>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                    <td>000</td>
-                                </tr>
-                                
                             </tbody>
 
                         </table>

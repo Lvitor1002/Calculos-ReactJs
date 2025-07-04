@@ -166,10 +166,11 @@ label title{
 
 .controleListaJuros{
     overflow-y: auto;
+    overflow-x: hidden;
+    height: 400px;
+    width: 100%;
 }
 .controleListaJuros table{
-    height: 500px;
-    width: 100%;
     min-width: 320px;
     border-radius: 10px;
     border-top: .5px solid rgba(255, 72, 0, 0.336);
@@ -236,6 +237,8 @@ label title{
     }
     .campoResultadoJuros{
         height: 750px;
+        overflow-x: hidden;
+        width: 100%;
     }
     .formularioJuros{
 
@@ -245,18 +248,32 @@ label title{
     .controleJuros h1{
         min-width: 98%;
     }
-    
-    
-}
-@media screen and (max-width: 805px) {
-    .controleJuros{
-        height: 2000px;
-        
+    .controleListaJuros{
+        height: 330px;
+        width: 700px;
     }
-    .campoResultadoJuros{
-        height: 850px;
+    .controleListaJuros table{
         width: 100%;
     }
+    .controleListaJuros thead tr th{
+        font-size: 1rem;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .controleJuros{
+        height: 100%;
+    }
+    
+    .controleperiodo{
+        position: relative;
+        bottom: 30px;
+    }
+    .controleEntradasJuros select{
+        left: 220px;
+    }
+    
     .formularioJuros h2{
         width: 100%;
         font-size: 1.2rem;
@@ -264,9 +281,25 @@ label title{
     .formularioJuros h3{
         font-size: 1.2rem;
     }
-    .controleEntradasJuros select{
-        left: 220px;
+    
+    .formularioJuros{
+        height: 80%;
     }
-    
-    
+    .controleListaJuros thead tr th{
+        padding: 10px 2px;
+        font-size: .7rem;
+        text-align: center;
+    }
+    .controleListaJuros tbody tr td{
+        padding: 20px 2px;
+        font-size: .6rem;
+        text-align: center;
+    }
+    .controleListaJuros{
+        height: 330px;
+        width: 330px!important;
+        position: relative;
+        top: 80px;
+        border-radius: 0 0 10px 10px;
+    }
 }
