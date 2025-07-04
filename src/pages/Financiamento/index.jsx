@@ -158,6 +158,14 @@ export default function Financiamento(){
         setValorFinanciado(0)
         setParcelas([])
     }
+    const formatarMoeda = (valor) => {
+        return new Intl.NumberFormat('pt-BR',{
+            
+            style:"currency",
+            currency:"BRL"
+
+        }).format(valor)
+    }
 
 
     return(
@@ -262,7 +270,7 @@ export default function Financiamento(){
 
                 </div>
 
-                <h2>Valor financiado: <span>R$ {valorFinanciado}</span></h2> 
+                <h2>Valor financiado: <span>R$ {formatarMoeda(valorFinanciado)}</span></h2> 
 
                 <div className="campoResultadoF">
                     

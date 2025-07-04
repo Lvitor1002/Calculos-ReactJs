@@ -1,14 +1,107 @@
 
+import { useState } from 'react'
 import './JurosSimples.css'
+import Swal from 'sweetalert2'
+
 
 export default function JurosSimples(){
+
+    const [valoresInputs, setValoresInputs] = useState({
+        inputValorInicial:'',
+        inputTaxa:'',
+        inputTempo:''
+    })
+    const [valorTotal,setValorTotal] = useState("0,00")
+    const [totalJuros,setTotalJuros] = useState(0)
+    const [tipoPeriodo, setTipoPeriodo] = useState("ano")
+    const [tipoTaxa, setTipoTaxa] = useState("ano")
+
+
+    function processarCalculo(e){
+        
+        e.preventDefault()
+
+        const valorInicial = parseFloat(valoresInputs.inputValorInicial.replace(",",".")) || 0
+        let taxa = parseFloat(valoresInputs.inputTaxa.replace(",",".")) / 100
+        let periodo = parseFloat(valoresInputs.inputTempo.replace(",",".")) || 0
+
+        if(tipoPeriodo === "ano"){
+            if(periodo > 50){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Entrada para o período ultrapassou 50 anos.. Tente novamente.`,
+                })
+                return 
+            }
+            periodo = periodo * 12
+        }
+        else{
+            if(periodo > 600){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: `Entrada para o período ultrapassou 600 meses.. Tente novamente.`,
+                })
+                return 
+            }
+        }
+
+        if(tipoTaxa === "ano"){
+            taxa = taxa / 12
+        }
+        
+        const valorFinal = calcularValorFinal(valorInicial, taxa, periodo)
+        setValorTotal(valorFinal.toFixed(2))
+
+        // Total em juros
+        const jurosT = calcularTotalJuros(valorFinal,valorInicial)
+        setTotalJuros(jurosT.toFixed(2))
+    }
+
+    //Valor total final
+    function calcularValorFinal(valorInicial,taxa,periodo){
+        let total = valorInicial
+
+        for(let i = 0; i<periodo; i++){
+            total = valorInicial * taxa * periodo
+            total += valorInicial
+        }
+        return total
+    }
+
+    //Total em juros
+    function calcularTotalJuros(valorFinal, valorInicial){
+        return valorFinal - valorInicial
+    }
+
+
+    function limparTodos(){
+
+        setValoresInputs({
+            inputValorInicial:'',
+            inputTaxa:'',
+            inputTempo:''
+        })
+        setValorTotal('0,00')
+        setTotalJuros(0)
+    }
+
+    const formatarMoeda = (valor) => {
+        return new Intl.NumberFormat('pt-BR',{
+            
+            style:"currency",
+            currency:"BRL"
+
+        }).format(valor)
+    }
 
     return(
         <div className="controleJurosSimples">
 
             <h1>Simulador de Juros Simples</h1>
 
-            <form className="formularioJurosSimples">
+            <form className="formularioJurosSimples" onSubmit={processarCalculo}>
                 
                 <div className="controleInputsJurosSimples">
 
@@ -21,7 +114,12 @@ export default function JurosSimples(){
                         type="number" 
                         id='idValorInicial' 
                         placeholder='8000,00'
-                        />
+                        value={valoresInputs.inputValorInicial}
+                        onChange={e=>setValoresInputs(prev=>({
+                            ...prev,
+                            inputValorInicial:e.target.value
+                        }))}
+                    />
 
                 </div>
                 
@@ -35,9 +133,16 @@ export default function JurosSimples(){
                         type="number" 
                         id='idTaxaMensal'
                         placeholder='Ex: 20'
+                        value={valoresInputs.inputTaxa}
+                        onChange={e=>setValoresInputs(prev=>({
+                            ...prev,
+                            inputTaxa: e.target.value
+                        }))}
                     />
                     <select 
                         id="idTaxaMensal"
+                        value={tipoTaxa}
+                        onChange={e=>setTipoTaxa(e.target.value)}
                         >
                         <option value="ano">Anual</option>
                         <option value="mes">Mensal</option>
@@ -52,10 +157,17 @@ export default function JurosSimples(){
                         type="number" 
                         id='idPeriodo' 
                         placeholder='Ex: 12'
+                        value={valoresInputs.inputTempo}
+                        onChange={e=>setValoresInputs(prev=>({
+                            ...prev,
+                            inputTempo:e.target.value
+                        }))}
                         
                     />
                     <select 
                         id="idPeriodo"
+                        value={tipoPeriodo}
+                        onChange={e=>setTipoPeriodo(e.target.value)}
                         >
                         <option value="ano">Anos</option>
                         <option value="mes">Meses</option>
@@ -68,21 +180,21 @@ export default function JurosSimples(){
                     
                     <button type='submit'>Calcular</button>
                     
-                    <button type='button'>Limpar</button>
+                    <button type='button' onClick={limparTodos}>Limpar</button>
 
                 </div>
                 
 
                 <div className="campoResultadoJurosSimples">
 
-                    <h3>Valor total final: R$<span> </span>
+                    <h3>Valor total final: R$<span> {formatarMoeda(valorTotal)} </span>
                     </h3>
 
 
-                    <h3>Valor Inicial: R$<span> </span>  
+                    <h3>Valor Inicial: R$<span> {formatarMoeda(valoresInputs.inputValorInicial)}</span>  
                     </h3>
 
-                    <h3>Total em juros: R$<span> </span> 
+                    <h3>Total em juros: R$<span> {formatarMoeda(totalJuros)} </span> 
                     </h3>
 
                     

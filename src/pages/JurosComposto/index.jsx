@@ -186,6 +186,14 @@ export default function JurosComposto(){
         setDadosTabela([])
     }
 
+    const formatarMoeda = (valor) => {
+        return new Intl.NumberFormat('pt-BR',{
+            
+            style:"currency",
+            currency:"BRL"
+
+        }).format(valor)
+    }
     return(
         <div className="controleJuros">
 
@@ -294,14 +302,14 @@ export default function JurosComposto(){
 
                 <div className="campoResultadoJuros">
 
-                    <h3>Valor total final: R$<span> {valorTotalFinal}</span>
+                    <h3>Valor total final: R$<span> {formatarMoeda(valorTotalFinal)}</span>
                     </h3>
 
 
-                    <h3>Valor total investido: R$<span> {totalInvestido}</span>  
+                    <h3>Valor total investido: R$<span> {formatarMoeda(totalInvestido)}</span>  
                     </h3>
 
-                    <h3>Total em juros: R$<span> {totalJuros}</span> 
+                    <h3>Total em juros: R$<span> {formatarMoeda(totalJuros)}</span> 
                     </h3>
 
                     
