@@ -175,7 +175,6 @@ label title{
     border-radius: 10px;
     border-top: .5px solid rgba(255, 72, 0, 0.336);
     padding-top: 20px;
-    overflow-y: scroll!important;
 }
 /* fixo */
 .controleListaJuros thead{
@@ -206,6 +205,7 @@ label title{
     position: relative;
     bottom: 50px;
     left: 390px;
+    
 }
 @media screen and (max-width: 1720px) {
     .controleJuros{
@@ -237,7 +237,7 @@ label title{
     }
     .campoResultadoJuros{
         height: 750px;
-        overflow-x: hidden;
+        
         width: 100%;
     }
     .formularioJuros{
@@ -271,7 +271,7 @@ label title{
         bottom: 30px;
     }
     .controleEntradasJuros select{
-        left: 220px;
+        left: 250px;
     }
     
     .formularioJuros h2{
@@ -286,6 +286,8 @@ label title{
         height: 80%;
     }
     .controleListaJuros thead tr th{
+        width: 50px;
+        white-space: wrap;
         padding: 10px 2px;
         font-size: .7rem;
         text-align: center;
