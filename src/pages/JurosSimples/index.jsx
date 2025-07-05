@@ -26,6 +26,33 @@ export default function JurosSimples(){
         let taxa = parseFloat(valoresInputs.inputTaxa.replace(",",".")) / 100
         let periodo = parseFloat(valoresInputs.inputTempo.replace(",",".")) || 0
 
+        if(!valorInicial || isNaN(valorInicial) || valorInicial < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o valor inicial incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+
+        if(!taxa || isNaN(taxa) || taxa < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para taxa juros incorreta.. Tente novamente.`,
+            })
+            return 
+        }
+        
+        if(!periodo || isNaN(periodo) || periodo <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o periodo incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+
         if(tipoPeriodo === "ano"){
             if(periodo > 50){
                 Swal.fire({

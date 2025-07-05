@@ -42,7 +42,7 @@ export const Sidebar = [
     },
     {
         titulo: 'Poupança X Selic',
-        rota: '/',
+        rota: '/poupancaSelic',
         icone: <BsGraphUpArrow />,
         classe: 'itens'
     },

@@ -5,6 +5,7 @@ import Financiamento from "./pages/Financiamento"
 import Aposentadoria from "./pages/Aposentadoria"
 import JurosComposto from "./pages/JurosComposto"
 import JurosSimples from "./pages/JurosSimples"
+import PoupancaSelic from "./pages/PoupancaSelic"
 
 export default function AppRoutes(){
     return(
@@ -18,6 +19,7 @@ export default function AppRoutes(){
                     <Route path="/Aposentadoria" element={<Aposentadoria/>}></Route>
                     <Route path="/jurosComposto" element={<JurosComposto/>}></Route>
                     <Route path="/JurosSimples" element={<JurosSimples/>}></Route>
+                    <Route path="/poupancaSelic" element={<PoupancaSelic/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>
