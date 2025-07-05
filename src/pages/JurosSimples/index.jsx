@@ -66,13 +66,7 @@ export default function JurosSimples(){
 
     //Valor total final
     function calcularValorFinal(valorInicial,taxa,periodo){
-        let total = valorInicial
-
-        for(let i = 0; i<periodo; i++){
-            total = valorInicial * taxa * periodo
-            total += valorInicial
-        }
-        return total
+        return valorInicial * (1 + (taxa * periodo))
     }
 
     //Total em juros
@@ -83,33 +77,25 @@ export default function JurosSimples(){
     //Dados para tabela
     function gerandoDadosTabela(valorInicial,periodo,taxa){
 
-        let total = valorInicial
-        let totalInvestido = valorInicial
         let totalJurosAcumulado = 0
+        let totalAcumulado  = valorInicial
         const dados = []
 
         for(let mes = 1; mes <= periodo; mes++){
             
-            // Calcula os juros do mês sobre o montante atual
-            const jurosMes = total * taxa 
+            // Juros do mês (sempre calculado sobre o valor inicial)
+            const jurosMes = valorInicial * taxa 
             totalJurosAcumulado += jurosMes
 
-            // Atualiza o montante com os juros
-            total = total * taxa * periodo
-
-            // Adiciona o aporte mensal
-            total += valorInicial
-
-            // Atualiza o total investido
-            totalInvestido += valorInicial
+            totalAcumulado = valorInicial + totalJurosAcumulado
 
             // Adiciona os dados do mês
             dados.push({
                 mes: mes,
                 juros: jurosMes.toFixed(2),
-                totalInvestido: totalInvestido.toFixed(2),
+                totalInvestido: valorInicial.toFixed(2),
                 totalJuros: totalJurosAcumulado.toFixed(2),
-                total: total.toFixed(2)
+                total: totalAcumulado.toFixed(2)
             })
         }
         return dados
@@ -254,7 +240,7 @@ export default function JurosSimples(){
 
                             <tbody>
                                 {dadosTabela.map(dado =>(
-                                    <tr key={dado.tempo}>
+                                    <tr key={dado.index}>
                                         <td>{dado.mes}</td>
                                         <td>{dado.juros}</td>
                                         <td>{dado.totalInvestido}</td>
