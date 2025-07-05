@@ -11,10 +11,11 @@ export default function JurosSimples(){
         inputTaxa:'',
         inputTempo:''
     })
-    const [valorTotal,setValorTotal] = useState("0,00")
+    const [valorTotal,setValorTotal] = useState(0)
     const [totalJuros,setTotalJuros] = useState(0)
     const [tipoPeriodo, setTipoPeriodo] = useState("ano")
     const [tipoTaxa, setTipoTaxa] = useState("ano")
+    const [dadosTabela,setDadosTabela] = useState([])
 
 
     function processarCalculo(e){
@@ -57,6 +58,10 @@ export default function JurosSimples(){
         // Total em juros
         const jurosT = calcularTotalJuros(valorFinal,valorInicial)
         setTotalJuros(jurosT.toFixed(2))
+
+        //Dados Tabela
+        const dados = gerandoDadosTabela(valorInicial,periodo,taxa)
+        setDadosTabela(dados)
     }
 
     //Valor total final
@@ -75,6 +80,41 @@ export default function JurosSimples(){
         return valorFinal - valorInicial
     }
 
+    //Dados para tabela
+    function gerandoDadosTabela(valorInicial,periodo,taxa){
+
+        let total = valorInicial
+        let totalInvestido = valorInicial
+        let totalJurosAcumulado = 0
+        const dados = []
+
+        for(let mes = 1; mes <= periodo; mes++){
+            
+            // Calcula os juros do mês sobre o montante atual
+            const jurosMes = total * taxa 
+            totalJurosAcumulado += jurosMes
+
+            // Atualiza o montante com os juros
+            total = total * taxa * periodo
+
+            // Adiciona o aporte mensal
+            total += valorInicial
+
+            // Atualiza o total investido
+            totalInvestido += valorInicial
+
+            // Adiciona os dados do mês
+            dados.push({
+                mes: mes,
+                juros: jurosMes.toFixed(2),
+                totalInvestido: totalInvestido.toFixed(2),
+                totalJuros: totalJurosAcumulado.toFixed(2),
+                total: total.toFixed(2)
+            })
+        }
+        return dados
+    }
+
 
     function limparTodos(){
 
@@ -83,8 +123,9 @@ export default function JurosSimples(){
             inputTaxa:'',
             inputTempo:''
         })
-        setValorTotal('0,00')
+        setValorTotal(0)
         setTotalJuros(0)
+        setDadosTabela([])
     }
 
     const formatarMoeda = (valor) => {
@@ -212,15 +253,15 @@ export default function JurosSimples(){
                             </thead>
 
                             <tbody>
-                                {/* {dadosTabela.map(dado =>(
+                                {dadosTabela.map(dado =>(
                                     <tr key={dado.tempo}>
                                         <td>{dado.mes}</td>
                                         <td>{dado.juros}</td>
                                         <td>{dado.totalInvestido}</td>
                                         <td>{dado.totalJuros}</td>
-                                        <td>{dado.totalAcumulado}</td>
+                                        <td>{dado.total}</td>
                                     </tr>
-                                ))} */}
+                                ))}
 
                             </tbody>
 
