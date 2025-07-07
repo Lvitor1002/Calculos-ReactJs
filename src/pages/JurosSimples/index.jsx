@@ -241,14 +241,14 @@ export default function JurosSimples(){
 
                 <div className="campoResultadoJurosSimples">
 
-                    <h3>Valor total final: R$<span> {formatarMoeda(valorTotal)} </span>
+                    <h3>Valor total final: <span> {formatarMoeda(valorTotal)} </span>
                     </h3>
 
 
-                    <h3>Valor Inicial: R$<span> {formatarMoeda(valoresInputs.inputValorInicial)}</span>  
+                    <h3>Valor Inicial: <span> {formatarMoeda(valoresInputs.inputValorInicial)}</span>  
                     </h3>
 
-                    <h3>Total em juros: R$<span> {formatarMoeda(totalJuros)} </span> 
+                    <h3>Total em juros: <span> {formatarMoeda(totalJuros)} </span> 
                     </h3>
 
                     

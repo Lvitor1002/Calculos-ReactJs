@@ -270,7 +270,7 @@ export default function Financiamento(){
 
                 </div>
 
-                <h2>Valor financiado: <span>R$ {formatarMoeda(valorFinanciado)}</span></h2> 
+                <h2>Valor financiado: <span> {formatarMoeda(valorFinanciado)}</span></h2> 
 
                 <div className="campoResultadoF">
                     
