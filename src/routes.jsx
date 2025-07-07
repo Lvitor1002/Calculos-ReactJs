@@ -6,6 +6,7 @@ import Aposentadoria from "./pages/Aposentadoria"
 import JurosComposto from "./pages/JurosComposto"
 import JurosSimples from "./pages/JurosSimples"
 import PoupancaSelic from "./pages/PoupancaSelic"
+import ReservaEmergencia from "./pages/ReservaEmergencia"
 
 export default function AppRoutes(){
     return(
@@ -20,6 +21,7 @@ export default function AppRoutes(){
                     <Route path="/jurosComposto" element={<JurosComposto/>}></Route>
                     <Route path="/JurosSimples" element={<JurosSimples/>}></Route>
                     <Route path="/poupancaSelic" element={<PoupancaSelic/>}></Route>
+                    <Route path="/reservaEmergencia" element={<ReservaEmergencia/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -48,7 +48,7 @@ export const Sidebar = [
     },
     {
         titulo: 'Reserva Emergência',
-        rota: '/',
+        rota: '/reservaEmergencia',
         icone: <BsPiggyBankFill/>,
         classe: 'itens'
     },

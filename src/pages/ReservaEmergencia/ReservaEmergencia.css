@@ -1,0 +1,227 @@
+
+.controleReserva{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 1000px;
+    transition: all .5s;
+}
+
+.controleReserva h1{
+    color: rgb(255, 72, 0);
+    font-size: 1.3rem;
+    position: relative;
+    top: 42px;
+    padding: 10px;
+    width: 60%;
+    min-width: 350px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    background: linear-gradient(to right,black,rgb(92, 26, 0));
+}
+
+.formularioReserva{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    flex-wrap: wrap;
+
+    width: 60%;
+    height: 90%;
+    min-width: 350px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px 10px;
+    transition: all 1s;
+}
+
+.formularioReserva button{
+    padding: 5px 20px;
+    color: white; 
+    background: linear-gradient(to left, rgb(104, 0, 0), rgb(255, 72, 0)); 
+    border: none;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 2s;
+}
+.formularioReserva button:hover{
+    border: .5px solid  rgb(255, 72, 0); 
+    background: transparent;
+    color: rgb(255, 72, 0); 
+    transition-duration: 1s;
+}
+.formularioReserva button:active{
+    transform: scale(1.08);
+    color: white;
+    transition-duration: 0s;
+}
+
+.controleEntradasReserva{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+
+    width: 90%;
+    min-width: 320px;
+    padding: 10px;
+    gap: 15px;
+    transition: all .5s;
+}
+.controleEntradasReserva input{
+    outline: none;
+    color: black;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-top: .5px solid rgba(0, 0, 0, 0.116);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.315);
+    transition: all .5s;
+}
+.controleEntradasReserva label{
+    font-size: 1.1rem;
+    color: rgba(0, 0, 0, 0.589);    
+}
+.controleEntradasReserva button{
+    width: 100%;
+    padding: 10px;
+    background-color: red;
+}
+.btns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 90%;
+    gap: 15px;
+}
+.btns button{
+    width: 100%;
+    padding: 10px;
+}
+label title{
+    color: red;
+}
+
+.formularioReserva h2{
+    text-align: center;
+    width: 50%;
+    padding: 10px;
+    border-radius: 10px;
+    border: .5px solid rgb(245, 82, 0);
+    box-shadow: 0px 0px 15px -12px rgba(0, 0, 0, 0.219);
+}
+.formularioReserva h2 span{
+    padding: 5px;
+    border-radius: 10px 0 10px 0;
+    color: rgb(255, 72, 0);
+}
+.campoResultadoReserva{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    width: 85%;
+    
+    border-radius: 10px;
+    border-bottom: 2px solid rgb(255, 72, 0);
+    padding: 20px;
+    transition: all .5s;
+}
+.campoResultadoReserva h3{
+    text-align: justify;
+    
+    width: 110%;
+    min-width: 320px;
+    height: 100%;
+    padding: 30px 10px;
+    border-radius: 10px;
+    border: .5px solid rgba(245, 82, 0, 0.171);
+    box-shadow: 0px 0px 15px -12px rgb(0, 0, 0);
+    color: rgba(0, 0, 0, 0.616);
+    font-size: 1.3rem;
+    position: relative;
+
+    transition: all .5s;
+}
+.campoResultadoReserva h3:hover{
+    background: linear-gradient(to left, rgba(250, 119, 67, 0.24),white);
+    border: 0; 
+    border-left: .5px solid rgba(245, 82, 0, 0.308);
+    transform: scale(1.01);
+    transition-duration: 0s;
+    box-shadow: 0;
+}
+
+.campoResultadoReserva h3 span{
+    padding: 5px;
+    border-radius: 10px 0 10px 0;
+    color: rgb(255, 72, 0);
+}
+
+
+.controleEntradasReserva select{
+    border: 0;
+    padding: 6px 10px;
+    border-radius: 10px;
+    outline: none;
+    width: 100%;
+    border-top: .5px solid rgba(0, 0, 0, 0.116);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.315);
+    
+}
+@media screen and (max-width: 1720px) {
+    .campoResultadoReserva h3{
+        text-align: center;
+    }
+    .campoResultadoReserva{
+        text-align: center;
+    }
+
+}
+
+@media screen and (max-width: 865px) {
+
+    .campoResultadoReserva{
+        
+        width: 100%;
+    }
+    .formularioReserva{
+
+        min-width: 98%;
+        
+    }
+    .controleReserva h1{
+        min-width: 98%;
+    }
+    
+}
+
+@media screen and (max-width: 500px) {
+    .controleReserva{
+        height: 100%;
+    }
+
+    
+    .formularioReserva h2{
+        width: 100%;
+        font-size: 1.2rem;
+    }
+    .campoResultadoReserva h3{
+        font-size: 1rem;
+    }
+    
+    .formularioReserva{
+        height: 80%;
+    }
+
+}
