@@ -5,7 +5,7 @@ export default function PoupancaSelic(){
     return(
         <div className="controlePoupancaSelic">
 
-            <h1>Simulador de Poupanca Selic</h1>
+            <h1>Simulador de lucratividade - Poupanca X Selic</h1>
 
             <form className="formularioPoupancaSelic" >
                 
