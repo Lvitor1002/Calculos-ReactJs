@@ -24,6 +24,32 @@ export default function PoupancaSelic(){
         const valorMensal = parseFloat(valoresInputs.inputValorMensal.replace(",",".")) || 0
         let periodo = parseInt(valoresInputs.inputPeriodo) || 0
 
+        if(!valorInicial || isNaN(valorInicial) || valorInicial < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o valor inicial incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+        
+        if(!valorMensal || isNaN(valorMensal) || valorMensal < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o valor mensal incorreto.. Tente novamente.`,
+            })
+            return 
+        }
+
+        if(!periodo || isNaN(periodo) || periodo <= 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada para o periodo incorreto.. Tente novamente.`,
+            })
+            return 
+        }
         if(tipoPeriodo === 'ano'){
             if(periodo > 50){
                 Swal.fire({
