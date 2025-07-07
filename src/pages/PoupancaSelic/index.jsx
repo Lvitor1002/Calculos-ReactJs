@@ -32,7 +32,7 @@ export default function PoupancaSelic(){
             })
             return 
         }
-        
+
         if(!valorMensal || isNaN(valorMensal) || valorMensal < 0){
             Swal.fire({
                 icon: "error",
@@ -184,6 +184,7 @@ export default function PoupancaSelic(){
         setTotalAcumuladoPoupanca(0)
         setTotalAcumuladoSelic(0)
         setDiferencaRentabilidade(0)
+        setDados([])
     }
 
     const formatarValores = (valor) =>{
