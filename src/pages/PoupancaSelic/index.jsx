@@ -6,13 +6,15 @@ import Swal from 'sweetalert2'
 export default function PoupancaSelic(){
 
     const [totalAcumuladoPoupanca,setTotalAcumuladoPoupanca] = useState(0)
-    const [totalAcumuladoSelic,settotalAcumuladoSelic] = useState(0)
+    const [totalAcumuladoSelic,setTotalAcumuladoSelic] = useState(0)
+    const [diferencaRentabilidade,setDiferencaRentabilidade] = useState(0)
     const [tipoPeriodo, setTipoPeriodo] = useState("ano")
     const [valoresInputs, setValoresInputs] = useState({
         inputValorInicial:'',
         inputValorMensal:'',
         inputPeriodo:''
     })
+    const [dados, setDados] = useState([])
 
 
     function processarCalculoPS(e){
@@ -48,6 +50,20 @@ export default function PoupancaSelic(){
         const montante = calcularAcumuladoPoupanca(valorInicial,periodo,valorMensal)
         setTotalAcumuladoPoupanca(montante)
         
+        const montanteSelic = calcularAcumuladoSelic(valorInicial,periodo,valorMensal)
+        setTotalAcumuladoSelic(montanteSelic)
+
+
+        // Converter para números antes de calcular a diferença
+        const montantePoupancaNum = parseFloat(montante.replace(',', '.'))
+        const montanteSelicNum = parseFloat(montanteSelic.replace(',', '.'))
+        const diferenca = montanteSelicNum - montantePoupancaNum
+        setDiferencaRentabilidade(diferenca.toFixed(2))
+
+
+        const dadosTabela = gerarDadosTabelaSelic(valorInicial, periodo, valorMensal)
+        setDados(dadosTabela)
+        
     }
 
     function calcularAcumuladoPoupanca(valorInicial,periodo,valorMensal){
@@ -73,9 +89,65 @@ export default function PoupancaSelic(){
         return montante.toFixed(2)
     }
 
-    // function calcularAcumuladoSelic(){
-    //     aqui
-    // }
+    function calcularAcumuladoSelic(valorInicial,periodo,valorMensal){
+        const taxaAnual = 14.75/100
+        const taxaDiaria = Math.pow(1+taxaAnual, 1/252) - 1
+
+        // Converter para taxa diária (252 dias úteis/ano)
+        let montanteSelic = valorInicial
+        const diasPorMes = 21 // Média de dias úteis por mês
+
+        for(let mes = 0; mes<=periodo; mes++){
+            
+            // Adiciona aporte mensal no início do mês
+            montanteSelic += valorMensal
+
+            // Aplica juros compostos diários por 21 dias úteis
+            for(let dia = 0; dia < diasPorMes; dia++){
+                montanteSelic *= (1+taxaDiaria)
+            }
+        }
+        return montanteSelic.toFixed(2)
+
+    }
+
+    function gerarDadosTabelaSelic(valorInicial, periodo, valorMensal){
+
+        const dados = []
+
+        let acumuladoPoupanca = valorInicial
+        const taxaAnualP = 7.17/100
+        const taxaMensalP = Math.pow(1+taxaAnualP,1/12) - 1
+
+
+        let acumuladoSelic = valorInicial 
+        const taxaAnualS = 14.75 / 100
+        const taxaDiariaS = Math.pow(1+taxaAnualS,1/252) - 1
+        const diasPorMes = 21
+
+        for(let mes = 1; mes <= periodo; mes++){
+
+            // Cálculo Poupança (aporte + juros mensais)
+            acumuladoPoupanca += valorMensal
+            acumuladoPoupanca *= (1 + taxaMensalP)
+
+            // Cálculo Selic (aporte + juros diários)
+            acumuladoSelic += valorMensal
+
+            // Aplica juros compostos diários por 21 dias úteis
+            for(let dia = 0; dia < diasPorMes; dia++){
+                acumuladoSelic *= (1+taxaDiariaS)
+            }
+
+            dados.push({
+                mes:mes,
+                rentabilidadeP: acumuladoPoupanca.toFixed(2),
+                rentabilidadeS: acumuladoSelic.toFixed(2)
+            })
+        }
+
+        return dados
+    }
 
     function limparCampos(){
         setValoresInputs({
@@ -84,6 +156,8 @@ export default function PoupancaSelic(){
             inputPeriodo:''
         })
         setTotalAcumuladoPoupanca(0)
+        setTotalAcumuladoSelic(0)
+        setDiferencaRentabilidade(0)
     }
 
     const formatarValores = (valor) =>{
@@ -126,7 +200,7 @@ export default function PoupancaSelic(){
                     <input 
                         type="number" 
                         id='idValorMensal' 
-                        placeholder='10000,00'
+                        placeholder='500,00'
                         value={valoresInputs.inputValorMensal}
                         onChange={e=>setValoresInputs(prev=>({
                             ...prev,
@@ -182,7 +256,7 @@ export default function PoupancaSelic(){
                     <h3>Total acumulado na Selic: <span> {formatarValores(totalAcumuladoSelic)} </span>  
                     </h3>
 
-                    <h3>Diferença de rentabilidade: <span> </span> 
+                    <h3>Diferença de rentabilidade: <span> {formatarValores(diferencaRentabilidade)}</span> 
                     </h3>
 
                     
@@ -198,15 +272,13 @@ export default function PoupancaSelic(){
                             </thead>
 
                             <tbody>
-                                {/* {dadosTabela.map(dado =>(
+                                {dados.map(dado =>(
                                     <tr key={dado.index}>
                                         <td>{dado.mes}</td>
-                                        <td>{dado.juros}</td>
-                                        <td>{dado.totalInvestido}</td>
-                                        <td>{dado.totalJuros}</td>
-                                        <td>{dado.total}</td>
+                                        <td>{dado.rentabilidadeP}</td>
+                                        <td>{dado.rentabilidadeS}</td>
                                     </tr>
-                                ))} */}
+                                ))}
 
                             </tbody>
 
