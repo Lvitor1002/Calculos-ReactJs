@@ -53,8 +53,8 @@ export const Sidebar = [
         classe: 'itens'
     },
     {
-        titulo: 'Investimento Renda Fixa',
-        rota: '/',
+        titulo: 'Comparador de Renda Fixa',
+        rota: '/comparadorRendaFixa',
         icone: <VscGraph />,
         classe: 'itens'
     },

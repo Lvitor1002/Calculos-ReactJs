@@ -1,10 +1,4 @@
 
-.teste{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
 .controleNavbar{
     display: flex;
     justify-content: space-around;

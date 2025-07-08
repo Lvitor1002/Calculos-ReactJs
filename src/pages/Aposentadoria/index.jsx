@@ -403,7 +403,7 @@ export default function Aposentadoria(){
                 </div>
                 
 
-                <div className="campoResultado">
+                <div className="campoResultadoAposentadoria">
 
                     <h3>Patrimônio acumulado estimado: 
                         <span>
