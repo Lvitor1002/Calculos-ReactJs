@@ -248,11 +248,12 @@ label title{
     }
     .formularioComparador{
         height: 2000px;
+        width: 80%;
         margin: 2% 0;
         border-radius: 10px 10px 10px 10px;
     }
     .controleTitulo {
-        width: 40.2%;
+        width: 80.2%;
     }
     .controleTitulo h1{
         font-size: 1.6rem;
@@ -271,6 +272,10 @@ label title{
         height: 2300px;
         margin-bottom: 30px;
     }
+    .formularioComparador > p{
+        text-align: center;
+        font-size: .8rem;
+    }
 
 
     
@@ -288,6 +293,7 @@ label title{
     .campoResultadoComparador h3{
         font-size: 1rem;
     }
+
     .controleTitulo h1{
         font-size: 1.2rem;
         top: 42px;
