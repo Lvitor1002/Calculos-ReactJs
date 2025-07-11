@@ -222,9 +222,10 @@ label title{
 }
 .mudarFundo h3{
     color: white!important; 
-}
-.mudarFundo h3{
     background:transparent!important; 
+}
+.mudarFundo p{
+    color: white!important;
 }
 .controleEntradasComparador select{
     border: 0;
