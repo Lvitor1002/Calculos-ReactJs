@@ -179,11 +179,6 @@ tbody tr td{
     border-radius: 0px 0px 10px 10px;
 }
 
-@media screen and (max-width: 1120px) {
-    .controleFinanciamento{
-        height: 1200px;
-    }
-}
 @media screen and (max-width: 1400px) {
     
     .controle-btn-limpar{
