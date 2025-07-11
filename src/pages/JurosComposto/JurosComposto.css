@@ -1,12 +1,12 @@
 
 .controleJuros{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 
     width: 100%;
-    height: 1800px;
+    height: 100%;
     transition: all .5s;
 }
 
@@ -17,6 +17,7 @@
     top: 42px;
     padding: 10px;
     width: 60%;
+    
     min-width: 350px;
     text-align: center;
     border-radius: 10px 10px 0 0;
@@ -29,9 +30,8 @@
     align-items: center;
     
     flex-wrap: wrap;
-
+    
     width: 60%;
-    height: 95%;
     min-width: 350px;
     background-color: white;
     border-radius: 10px;
@@ -208,10 +208,7 @@ label title{
     
 }
 @media screen and (max-width: 1720px) {
-    .controleJuros{
-        height: 1600px;
-        
-    }
+
     .formularioJuros h3{
         text-align: center;
     }
@@ -220,10 +217,7 @@ label title{
     }
 }
 @media screen and (max-width: 1300px) {
-    .controleJuros{
-        height: 1700px;
-        
-    }
+
     .campoResultadoJuros{
         height: 700px;
     }
@@ -231,10 +225,7 @@ label title{
 }
 
 @media screen and (max-width: 865px) {
-    .controleJuros{
-        height: 1800px;
-        
-    }
+
     .campoResultadoJuros{
         height: 750px;
         

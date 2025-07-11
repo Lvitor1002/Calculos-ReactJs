@@ -206,8 +206,9 @@ export default function ReservaEmergencia(){
 
                 <div className="campoResultadoReserva">
 
-
-                    <h3>Reserva de emergência sugerida: <span> {formatarValor(reservaEmergencia)} </span></h3> 
+                    {reservaEmergencia > 0 &&
+                        <h3>Reserva de emergência sugerida: <span> {formatarValor(reservaEmergencia)} </span></h3> 
+                    }
 
                     {mesesRestantesReserva > 0 || diasRestantesReserva > 0 ? (
                         <h3>

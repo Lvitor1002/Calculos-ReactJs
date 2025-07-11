@@ -17,6 +17,7 @@ export default function PoupancaSelic(){
     const [dados, setDados] = useState([])
 
 
+
     function processarCalculoPS(e){
         e.preventDefault()
 
@@ -273,46 +274,48 @@ export default function PoupancaSelic(){
 
                 </div>
                 
+                {totalAcumuladoPoupanca > 0 &&
+                
+                    <div className="campoResultadoPoupancaSelic">
 
-                <div className="campoResultadoPoupancaSelic">
-
-                    <h3>Total acumulado na Poupança: <span> {formatarValores(totalAcumuladoPoupanca)} </span>
-                    </h3>
+                        <h3>Total acumulado na Poupança: <span> {formatarValores(totalAcumuladoPoupanca)} </span>
+                        </h3>
 
 
-                    <h3>Total acumulado na Selic: <span> {formatarValores(totalAcumuladoSelic)} </span>  
-                    </h3>
+                        <h3>Total acumulado na Selic: <span> {formatarValores(totalAcumuladoSelic)} </span>  
+                        </h3>
 
-                    <h3>Diferença de rentabilidade: <span> {formatarValores(diferencaRentabilidade)}</span> 
-                    </h3>
+                        <h3>Diferença de rentabilidade: <span> {formatarValores(diferencaRentabilidade)}</span> 
+                        </h3>
 
-                    
-                    <div className="controleListaPoupancaSelic">
-                        <table>
+                        
+                        <div className="controleListaPoupancaSelic">
+                            <table>
 
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Rentabilidade Poupança (R$)</th>
-                                    <th>Rentabilidade Selic (R$)</th>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                {dados.map(dado =>(
-                                    <tr key={dado.index}>
-                                        <td>{dado.mes}</td>
-                                        <td>{dado.rentabilidadeP}</td>
-                                        <td>{dado.rentabilidadeS}</td>
+                                <thead>
+                                    <tr>
+                                        <th>Mês</th>
+                                        <th>Rentabilidade Poupança (R$)</th>
+                                        <th>Rentabilidade Selic (R$)</th>
                                     </tr>
-                                ))}
+                                </thead>
 
-                            </tbody>
+                                <tbody>
+                                    {dados.map(dado =>(
+                                        <tr key={dado.index}>
+                                            <td>{dado.mes}</td>
+                                            <td>{dado.rentabilidadeP}</td>
+                                            <td>{dado.rentabilidadeS}</td>
+                                        </tr>
+                                    ))}
 
-                        </table>
+                                </tbody>
+
+                            </table>
+                        </div>
+
                     </div>
-
-                </div>
+                }
 
             </form>
         </div>

@@ -24,7 +24,6 @@ export default function Aposentadoria(){
 
 
 
-
     function processar(evento){
 
         evento.preventDefault()
@@ -405,42 +404,32 @@ export default function Aposentadoria(){
 
                 <div className="campoResultadoAposentadoria">
 
-                    <h3>Patrimônio acumulado estimado: 
-                        <span>
-                            {heranca ? formatarMoeda(parseFloat(heranca)) : 'R$ 0,00'}
-                        </span>
-                    </h3>
-
-                    {/* Exibir apenas se meta for ultrapassada */}
-                    {metaPatrimonio !== null && (
-
-                        <h3>Você superou sua meta de patrimônio em: 
-                            <span>{formatarMoeda(metaPatrimonio)} Reais. Parabéns!</span>
-                        </h3>
-                    )}
-                    
-
-                    <h3>Renda mensal assegurada:  
-                        <span>
-                            {rendaMensalAposentado ? formatarMoeda(parseFloat(rendaMensalAposentado)): 'R$ 0,00'}
-                        </span>
-
-                        <br />
-
-                        <p>(Baseado numa expectativaVida de 85 anos)</p>
-
-                    </h3>
-
-
-                    {/* Exibir apenas se meta for ultrapassada */}
-                    {metaRendaMensal !== null && (
-                        <h3>
-                            Você superou sua meta de renda mensal em: 
+                    {heranca > 0 && 
+                        <h3>Patrimônio acumulado estimado: 
                             <span>
-                                {formatarMoeda(metaRendaMensal)} Reais. Parabéns!
+                                {heranca ? formatarMoeda(parseFloat(heranca)) : 'R$ 0,00'}
                             </span>
                         </h3>
-                    )}
+                    }
+
+                    
+                    
+                    {rendaMensalAposentado > 0 &&
+                    
+                        <h3>Renda mensal assegurada:  
+                            <span>
+                                {rendaMensalAposentado ? formatarMoeda(parseFloat(rendaMensalAposentado)): 'R$ 0,00'}
+                            </span>
+
+                            <br />
+
+                            <p>(Baseado numa expectativaVida de 85 anos)</p>
+
+                        </h3>
+                    }
+
+
+                    
                 </div>
 
             </form>

@@ -6,7 +6,6 @@
     flex-direction: column;
 
     width: 100%;
-    height: 1800px;
     transition: all .5s;
 }
 
@@ -218,10 +217,7 @@ label title{
     
 }
 @media screen and (max-width: 1720px) {
-    .controlePoupancaSelic{
-        height: 1600px;
-        
-    }
+
     .formularioPoupancaSelic h3{
         text-align: center;
     }
@@ -235,10 +231,7 @@ label title{
     }
 }
 @media screen and (max-width: 1300px) {
-    .controlePoupancaSelic{
-        height: 1700px;
-        
-    }
+
     .campoResultadoPoupancaSelic{
         height: 700px;
     }
@@ -246,10 +239,7 @@ label title{
 }
 
 @media screen and (max-width: 865px) {
-    .controlePoupancaSelic{
-        height: 1800px;
-        
-    }
+
     .campoResultadoPoupancaSelic{
         height: 750px;
         

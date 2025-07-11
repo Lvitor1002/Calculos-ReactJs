@@ -31,7 +31,7 @@
     width: 100%;
     text-align: center;
     border-radius: 10px 10px 0 0;
-    background: linear-gradient(to right,black,rgb(92, 26, 0));
+    background: linear-gradient(to right,rgb(87, 26, 1),black,rgba(0, 0, 0, 0));
     z-index: 10;
 }
 
@@ -51,10 +51,21 @@
     transition: all .3s;
 }
 
+.mudarCor{
+    background-color: rgba(255, 255, 255, 0.281);
+    color: white;
+}
+.mudarCor button{
+    background: linear-gradient(to left, rgb(117, 32, 32), rgb(0, 0, 0))!important; 
+}
+.mudarCor label{
+    color: white!important; 
+}
+
 .formularioComparador button{
+    background: linear-gradient(to left, rgb(104, 0, 0), rgb(255, 72, 0)); 
     padding: 5px 20px;
     color: white; 
-    background: linear-gradient(to left, rgb(104, 0, 0), rgb(255, 72, 0)); 
     border: none;
     border-radius: 10px;
     font-size: 1.3rem;
@@ -206,7 +217,15 @@ label title{
     color: rgb(255, 72, 0);
 }
 
-
+.mudarFundo{
+    color: white;
+}
+.mudarFundo h3{
+    color: white!important; 
+}
+.mudarFundo h3{
+    background:transparent!important; 
+}
 .controleEntradasComparador select{
     border: 0;
     padding: 6px 10px;
@@ -258,7 +277,9 @@ label title{
     .controleTitulo h1{
         font-size: 1.6rem;
         padding: 10px;
+        background: linear-gradient(to right,black,rgb(92, 26, 0))!important;
     }
+    
     
     
 }

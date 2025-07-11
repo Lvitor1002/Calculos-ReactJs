@@ -33,7 +33,7 @@ export default function Financiamento(){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: `Entrada para valor(R$) incorreto..`,
+                text: `Entrada para valor(R$) incorreto.. `,
             })
             return
         }
@@ -41,7 +41,7 @@ export default function Financiamento(){
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: `Valor de entrada(R$) incorreto..`,
+                text: `Valor de entrada(R$) incorreto.. Deve ser menor que o valor inicial.`,
             })
             return
         }
@@ -270,45 +270,51 @@ export default function Financiamento(){
 
                 </div>
 
-                <h2>Valor financiado: <span> {formatarMoeda(valorFinanciado)}</span></h2> 
 
-                <div className="campoResultadoF">
+                {valorFinanciado > 0 && 
+                    <>
                     
-                    <h3>Lista de Parcelas</h3>
-                    
-                    <div className="controleLista">
-                        <table>
+                        <h2>Valor financiado: <span> {formatarMoeda(valorFinanciado)}</span></h2> 
+                        
+                        <div className="campoResultadoF">
+                        
 
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Prestação (R$)</th>
-                                    <th>Amortização (R$)</th>
-                                    <th>Juros (R$)</th>
-                                    <th>Saldo Devedor (R$)</th>
-                                </tr>
-                            </thead>
+                            <h3>Lista de Parcelas</h3>
+                            
+                            <div className="controleLista">
+                                <table>
 
-                            <tbody>
-                                {parcelas.map((parcela)=>(
+                                    <thead>
+                                        <tr>
+                                            <th>Mês</th>
+                                            <th>Prestação (R$)</th>
+                                            <th>Amortização (R$)</th>
+                                            <th>Juros (R$)</th>
+                                            <th>Saldo Devedor (R$)</th>
+                                        </tr>
+                                    </thead>
 
-                                    <tr key={parcela.mes}>
+                                    <tbody>
+                                        {parcelas.map((parcela)=>(
 
-                                        <td>{parcela.mes}</td>
-                                        <td>{parcela.prestacao}</td>
-                                        <td>{parcela.amortizacao}</td>
-                                        <td>{parcela.juros}</td>
-                                        <td>{parcela.saldoDevedor}</td>
+                                            <tr key={parcela.mes}>
 
-                                    </tr>
-                                ))}
-                                
-                            </tbody>
+                                                <td>{parcela.mes}</td>
+                                                <td>{parcela.prestacao}</td>
+                                                <td>{parcela.amortizacao}</td>
+                                                <td>{parcela.juros}</td>
+                                                <td>{parcela.saldoDevedor}</td>
 
-                        </table>
-                    </div>
+                                            </tr>
+                                        ))}
+                                        
+                                    </tbody>
 
-                </div>
+                                </table>
+                            </div>
+                        </div>
+                    </>
+                }
 
             </form>
         </div>

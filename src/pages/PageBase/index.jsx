@@ -8,7 +8,7 @@ export default function PageBase(){
         <main className='controlePageBase'>
             <Navbar/>
             <Outlet/>
-            <Footer/>
+            
         </main>
     )
 }

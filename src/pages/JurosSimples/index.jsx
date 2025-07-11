@@ -239,49 +239,52 @@ export default function JurosSimples(){
                 </div>
                 
 
-                <div className="campoResultadoJurosSimples">
-
-                    <h3>Valor total final: <span> {formatarMoeda(valorTotal)} </span>
-                    </h3>
-
-
-                    <h3>Valor Inicial: <span> {formatarMoeda(valoresInputs.inputValorInicial)}</span>  
-                    </h3>
-
-                    <h3>Total em juros: <span> {formatarMoeda(totalJuros)} </span> 
-                    </h3>
-
+                {valorTotal > 0 &&
                     
-                    <div className="controleListaJurosSimples">
-                        <table>
+                    <div className="campoResultadoJurosSimples">
 
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Juros (R$)</th>
-                                    <th>Total Investido (R$)</th>
-                                    <th>Total Juros (R$)</th>
-                                    <th>Total Acumulado (R$)</th>
-                                </tr>
-                            </thead>
+                        <h3>Valor total final: <span> {formatarMoeda(valorTotal)} </span>
+                        </h3>
 
-                            <tbody>
-                                {dadosTabela.map(dado =>(
-                                    <tr key={dado.index}>
-                                        <td>{dado.mes}</td>
-                                        <td>{dado.juros}</td>
-                                        <td>{dado.totalInvestido}</td>
-                                        <td>{dado.totalJuros}</td>
-                                        <td>{dado.total}</td>
+
+                        <h3>Valor Inicial: <span> {formatarMoeda(valoresInputs.inputValorInicial)}</span>  
+                        </h3>
+
+                        <h3>Total em juros: <span> {formatarMoeda(totalJuros)} </span> 
+                        </h3>
+
+                        
+                        <div className="controleListaJurosSimples">
+                            <table>
+
+                                <thead>
+                                    <tr>
+                                        <th>Mês</th>
+                                        <th>Juros (R$)</th>
+                                        <th>Total Investido (R$)</th>
+                                        <th>Total Juros (R$)</th>
+                                        <th>Total Acumulado (R$)</th>
                                     </tr>
-                                ))}
+                                </thead>
 
-                            </tbody>
+                                <tbody>
+                                    {dadosTabela.map(dado =>(
+                                        <tr key={dado.index}>
+                                            <td>{dado.mes}</td>
+                                            <td>{dado.juros}</td>
+                                            <td>{dado.totalInvestido}</td>
+                                            <td>{dado.totalJuros}</td>
+                                            <td>{dado.total}</td>
+                                        </tr>
+                                    ))}
 
-                        </table>
+                                </tbody>
+
+                            </table>
+                        </div>
+
                     </div>
-
-                </div>
+                }
 
             </form>
         </div>

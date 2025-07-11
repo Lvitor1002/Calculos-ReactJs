@@ -342,7 +342,7 @@ export default function ComparadorRendaFixa(){
 
                     </div>
 
-                    <div className="campoResultadoComparador">
+                    <div className="campoResultadoComparador ">
 
                         { tipoInvestimento && (
                             <h2>Tipo de Investimento: <span>{tipoInvestimento}</span></h2>
@@ -364,7 +364,7 @@ export default function ComparadorRendaFixa(){
                     </div>
 
                 </form>
-                <form className="formularioComparador" onSubmit={processarCalculo2}>
+                <form className="formularioComparador mudarCor" onSubmit={processarCalculo2}>
 
 
                     <div className="controleEntradasComparador">
@@ -461,7 +461,7 @@ export default function ComparadorRendaFixa(){
 
                     </div>
 
-                    <div className="campoResultadoComparador">
+                    <div className="campoResultadoComparador mudarFundo">
 
                         { tipoInvestimento2 && (
                             <h2>Tipo de Investimento: <span>{tipoInvestimento2}</span></h2>

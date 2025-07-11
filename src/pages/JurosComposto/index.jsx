@@ -300,49 +300,54 @@ export default function JurosComposto(){
                 </div>
                 
 
-                <div className="campoResultadoJuros">
-
-                    <h3>Valor total final: R$<span> {formatarMoeda(valorTotalFinal)}</span>
-                    </h3>
-
-
-                    <h3>Valor total investido: R$<span> {formatarMoeda(totalInvestido)}</span>  
-                    </h3>
-
-                    <h3>Total em juros: R$<span> {formatarMoeda(totalJuros)}</span> 
-                    </h3>
-
+                {valorTotalFinal > 0 &&
+                    <>
                     
-                    <div className="controleListaJuros">
-                        <table>
+                        <div className="campoResultadoJuros">
 
-                            <thead>
-                                <tr>
-                                    <th>Mês</th>
-                                    <th>Juros (R$)</th>
-                                    <th>Total Investido (R$)</th>
-                                    <th>Total Juros (R$)</th>
-                                    <th>Total Acumulado (R$)</th>
-                                </tr>
-                            </thead>
+                            <h3>Valor total final: R$<span> {formatarMoeda(valorTotalFinal)}</span>
+                            </h3>
 
-                            <tbody>
-                                {dadosTabela.map(dado =>(
-                                    <tr key={dado.tempo}>
-                                        <td>{dado.mes}</td>
-                                        <td>{dado.juros}</td>
-                                        <td>{dado.totalInvestido}</td>
-                                        <td>{dado.totalJuros}</td>
-                                        <td>{dado.totalAcumulado}</td>
-                                    </tr>
-                                ))}
 
-                            </tbody>
+                            <h3>Valor total investido: R$<span> {formatarMoeda(totalInvestido)}</span>  
+                            </h3>
 
-                        </table>
-                    </div>
+                            <h3>Total em juros: R$<span> {formatarMoeda(totalJuros)}</span> 
+                            </h3>
 
-                </div>
+                            
+                            <div className="controleListaJuros">
+                                <table>
+
+                                    <thead>
+                                        <tr>
+                                            <th>Mês</th>
+                                            <th>Juros (R$)</th>
+                                            <th>Total Investido (R$)</th>
+                                            <th>Total Juros (R$)</th>
+                                            <th>Total Acumulado (R$)</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {dadosTabela.map(dado =>(
+                                            <tr key={dado.tempo}>
+                                                <td>{dado.mes}</td>
+                                                <td>{dado.juros}</td>
+                                                <td>{dado.totalInvestido}</td>
+                                                <td>{dado.totalJuros}</td>
+                                                <td>{dado.totalAcumulado}</td>
+                                            </tr>
+                                        ))}
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </>
+                }
 
             </form>
         </div>
