@@ -248,7 +248,8 @@ label title{
     }
     .formularioComparador{
         height: 2000px;
-        margin: 10% 0;
+        margin: 2% 0;
+        margin-top: 60px;
         border-radius: 10px 10px 10px 10px;
     }
     .controleTitulo {
