@@ -249,7 +249,6 @@ label title{
     .formularioComparador{
         height: 2000px;
         margin: 2% 0;
-        margin-top: 60px;
         border-radius: 10px 10px 10px 10px;
     }
     .controleTitulo {
@@ -268,6 +267,10 @@ label title{
         
         width: 100%;
     }
+    .controleComparadorRendaFixa{
+        height: 2300px;
+        margin-bottom: 30px;
+    }
 
 
     
@@ -276,7 +279,8 @@ label title{
 
 @media screen and (max-width: 500px) {
 
-
+    
+    
     .campoResultadoComparador h2{
         width: 100%;
         font-size: 1.2rem;
