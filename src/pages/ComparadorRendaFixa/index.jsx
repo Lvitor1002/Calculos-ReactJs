@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './ComparadorRendaFixa.css'
+import Swal from 'sweetalert2'
+
 
 export default function ComparadorRendaFixa(){
 
@@ -22,6 +24,38 @@ export default function ComparadorRendaFixa(){
         const valorRentabilidade = parseFloat(inputsValores.inputRentabilidade.replace(",",".")) || 0
         const periodo = parseFloat(inputsValores.inputPeriodo.replace(",",".")) || 0
 
+        if(!tipoInvestimento){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Escolha um tipo de Investimento!`,
+            })
+            return 
+        }
+        if(!tipoRentabilidade){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Escolha um dos botões de tipo de Rentabilidade [PRE, CDI ou IPCA]`,
+            })
+            return 
+        }
+        if(!valorRentabilidade || isNaN(valorRentabilidade) || valorRentabilidade < 0){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada inválida para o campo de Rentabilidade!`,
+            })
+            return 
+        }
+        if(!periodo || periodo < 0 || periodo > 600 || isNaN(periodo)){
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: `Entrada inválida para o campo de Tempo de investimento! Obs: Max. 600 meses!`,
+            })
+            return 
+        }
 
         const rentabilidade = calcularRentabilidadeLiquida(valorRentabilidade,periodo,tipoRentabilidade,tipoInvestimento)
         setRentabilidadeLiquida(rentabilidade.toFixed(2))
@@ -114,129 +148,251 @@ export default function ComparadorRendaFixa(){
 
 
     return(
-        <div className="controleComparadorRendaFixa">
+        <>
+            <div className="controleTitulo">
+                <h1>Comparador de Renda Fixa</h1>
+            </div>
 
-            <h1>Comparador de Renda Fixa</h1>
+            <div className="controleComparadorRendaFixa">
 
-            <form className="formularioComparador" onSubmit={processarCalculo}>
+                <form className="formularioComparador" onSubmit={processarCalculo}>
 
+                    <div className="controleEntradasComparador">
 
-                <div className="controleEntradasComparador">
+                        <label htmlFor="idSelect">Tipo de Investimento</label>
 
-                    <label htmlFor="idSelect">Tipo de Investimento</label>
+                        <select 
+                                id='idSelect'
+                                value={tipoInvestimento}
+                                onChange={e=>setTipoInvestimento(e.target.value)}
+                            >
+                                <option defaultValue>Selecione o tipo de investimento:</option>    
+                                <option value="CDB">CDB</option>    
+                                <option value="LCA">LCA</option>    
+                                <option value="LCI">LCI</option>    
+                                <option value="CRI">CRI</option>    
+                                <option value="CRA">CRA</option>    
+                                <option value="DEBENTURE">DEBÊNTURE</option>    
+                                <option value="DEBENTUREINCENTIVADA">DEBÊNTURE INCENTIVADA</option>    
+                                <option value="TESOURODIRETO">TESOURO DIRETO</option>    
+                        </select>
 
-                    <select 
-                            id='idSelect'
-                            value={tipoInvestimento}
-                            onChange={e=>setTipoInvestimento(e.target.value)}
+                    </div>
+
+                    <p>A rentabilidade está em:</p>
+                    <div className="controleEntradasComparador controleBtnRentabilidade">
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('PRE')}
+                            onClick={()=> handleTipoRentabilidade('PRE')} 
+                            >
+                            PRÉ-FIXADO
+                        </button>
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('CDI')}
+                            onClick={()=> handleTipoRentabilidade('CDI')} 
+                            >
+                            % do CDI
+                        </button>
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('IPCA')}
+                            onClick={()=> handleTipoRentabilidade('IPCA')} 
                         >
-                            <option defaultValue>Selecione o tipo de investimento:</option>    
-                            <option value="CDB">CDB</option>    
-                            <option value="LCA">LCA</option>    
-                            <option value="LCI">LCI</option>    
-                            <option value="CRI">CRI</option>    
-                            <option value="CRA">CRA</option>    
-                            <option value="DEBENTURE">DEBÊNTURE</option>    
-                            <option value="DEBENTUREINCENTIVADA">DEBÊNTURE INCENTIVADA</option>    
-                            <option value="TESOURODIRETO">TESOURO DIRETO</option>    
-                    </select>
+                            TAXA FIXADA + IPCA
+                        </button>
+                    </div>
 
-                </div>
+                    <div className="controleEntradasComparador">
 
-                <p>A rentabilidade está em:</p>
-                <div className="controleEntradasComparador controleBtnRentabilidade">
+                        <label htmlFor="idCusto">Rentabilidade (R$)</label>
                     
-                    <button
-                        type='button'
-                        style={styleBtn('PRE')}
-                        onClick={()=> handleTipoRentabilidade('PRE')} 
+                        <input 
+                            type="number" 
+                            id='idCusto' 
+                            placeholder='5000,00'
+                            value={inputsValores.inputRentabilidade}
+                            onChange={e=>setInputsValores(prev=>({
+                                ...prev,
+                                inputRentabilidade: e.target.value
+                            }))}
+                        />
+                    </div>
+                    
+
+                    <div className="controleEntradasComparador">
+                        
+                        <label htmlFor="idSalario">Tempo de investimento (meses)</label>
+                        
+                        <input 
+                            type="number" 
+                            id='idSalario' 
+                            placeholder='5'
+                            value={inputsValores.inputPeriodo}
+                            onChange={e=>setInputsValores(prev=>({
+                                ...prev,
+                                inputPeriodo:e.target.value
+                            }))}
+                        />
+                    </div>
+                    
+
+                    <p>Valores base utilizados: CDI 14.65%, IPCA 4.5%</p>
+
+                    <div className="controle-btn-limpar btnsComparador">
+                        
+                        <button type='submit'>Calcular</button>
+                        
+                        <button type='button' onClick={limparCampo}>Limpar</button>
+
+                    </div>
+
+                    <div className="campoResultadoComparador">
+
+                        { tipoInvestimento && (
+                            <h2>Tipo de Investimento: <span>{tipoInvestimento}</span></h2>
+                        )}
+                        
+                        {rentabilidadeLiquida > 0 && (
+                            <h3> 
+                                Rentabilidade Líquida (a.a): <span> {formatarPorcentagem(rentabilidadeLiquida)} </span>
+                                <br />
+                                Período: <span>{periodoRentabilidadeLiquida} meses</span>
+                            </h3> 
+                        )}
+                        
+
+                        {isentoIR === true && (
+                            <p>Este investimento é isento de Imposto de Renda.</p>
+                        )}
+
+                    </div>
+
+                </form>
+                <form className="formularioComparador" onSubmit={processarCalculo}>
+
+
+                    <div className="controleEntradasComparador">
+
+                        <label htmlFor="idSelect">Tipo de Investimento</label>
+
+                        <select 
+                                id='idSelect'
+                                value={tipoInvestimento}
+                                onChange={e=>setTipoInvestimento(e.target.value)}
+                            >
+                                <option defaultValue>Selecione o tipo de investimento:</option>    
+                                <option value="CDB">CDB</option>    
+                                <option value="LCA">LCA</option>    
+                                <option value="LCI">LCI</option>    
+                                <option value="CRI">CRI</option>    
+                                <option value="CRA">CRA</option>    
+                                <option value="DEBENTURE">DEBÊNTURE</option>    
+                                <option value="DEBENTUREINCENTIVADA">DEBÊNTURE INCENTIVADA</option>    
+                                <option value="TESOURODIRETO">TESOURO DIRETO</option>    
+                        </select>
+
+                    </div>
+
+                    <p>A rentabilidade está em:</p>
+                    <div className="controleEntradasComparador controleBtnRentabilidade">
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('PRE')}
+                            onClick={()=> handleTipoRentabilidade('PRE')} 
+                            >
+                            PRÉ-FIXADO
+                        </button>
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('CDI')}
+                            onClick={()=> handleTipoRentabilidade('CDI')} 
+                            >
+                            % do CDI
+                        </button>
+                        
+                        <button
+                            type='button'
+                            style={styleBtn('IPCA')}
+                            onClick={()=> handleTipoRentabilidade('IPCA')} 
                         >
-                        PRÉ-FIXADO
-                    </button>
+                            TAXA FIXADA + IPCA
+                        </button>
+                    </div>
+
+                    <div className="controleEntradasComparador">
+
+                        <label htmlFor="idCusto">Rentabilidade (R$)</label>
                     
-                    <button
-                        type='button'
-                        style={styleBtn('CDI')}
-                        onClick={()=> handleTipoRentabilidade('CDI')} 
-                        >
-                        % do CDI
-                    </button>
-                    
-                    <button
-                        type='button'
-                        style={styleBtn('IPCA')}
-                        onClick={()=> handleTipoRentabilidade('IPCA')} 
-                    >
-                        TAXA FIXADA + IPCA
-                    </button>
-                </div>
-
-                <div className="controleEntradasComparador">
-
-                    <label htmlFor="idCusto">Rentabilidade (R$)</label>
-                
-                    <input 
-                        type="number" 
-                        id='idCusto' 
-                        placeholder='5000,00'
-                        value={inputsValores.inputRentabilidade}
-                        onChange={e=>setInputsValores(prev=>({
-                            ...prev,
-                            inputRentabilidade: e.target.value
-                        }))}
-                    />
-                </div>
-                
-
-                <div className="controleEntradasComparador">
-                    
-                    <label htmlFor="idSalario">Tempo de investimento (meses)</label>
-                    
-                    <input 
-                        type="number" 
-                        id='idSalario' 
-                        placeholder='5'
-                        value={inputsValores.inputPeriodo}
-                        onChange={e=>setInputsValores(prev=>({
-                            ...prev,
-                            inputPeriodo:e.target.value
-                        }))}
-                    />
-                </div>
-                
-
-                <p>Valores base utilizados: CDI 14.65%, IPCA 4.5%</p>
-
-                <div className="controle-btn-limpar btnsComparador">
-                    
-                    <button type='submit'>Calcular</button>
-                    
-                    <button type='button' onClick={limparCampo}>Limpar</button>
-
-                </div>
-
-                <div className="campoResultadoComparador">
-
-                    { tipoInvestimento && (
-                        <h2>Tipo de Investimento: <span>{tipoInvestimento}</span></h2>
-                    )}
-                    
-                    {rentabilidadeLiquida > 0 && (
-                        <h3> 
-                            Rentabilidade Líquida (a.a): <span> {formatarPorcentagem(rentabilidadeLiquida)} </span>
-                            <br />
-                            Período: <span>{periodoRentabilidadeLiquida} meses</span>
-                        </h3> 
-                    )}
+                        <input 
+                            type="number" 
+                            id='idCusto' 
+                            placeholder='5000,00'
+                            value={inputsValores.inputRentabilidade}
+                            onChange={e=>setInputsValores(prev=>({
+                                ...prev,
+                                inputRentabilidade: e.target.value
+                            }))}
+                        />
+                    </div>
                     
 
-                    {isentoIR === true && (
-                        <p>Este investimento é isento de Imposto de Renda.</p>
-                    )}
+                    <div className="controleEntradasComparador">
+                        
+                        <label htmlFor="idSalario">Tempo de investimento (meses)</label>
+                        
+                        <input 
+                            type="number" 
+                            id='idSalario' 
+                            placeholder='5'
+                            value={inputsValores.inputPeriodo}
+                            onChange={e=>setInputsValores(prev=>({
+                                ...prev,
+                                inputPeriodo:e.target.value
+                            }))}
+                        />
+                    </div>
+                    
 
-                </div>
+                    <p>Valores base utilizados: CDI 14.65%, IPCA 4.5%</p>
 
-            </form>
-        </div>
+                    <div className="controle-btn-limpar btnsComparador">
+                        
+                        <button type='submit'>Calcular</button>
+                        
+                        <button type='button' onClick={limparCampo}>Limpar</button>
+
+                    </div>
+
+                    <div className="campoResultadoComparador">
+
+                        { tipoInvestimento && (
+                            <h2>Tipo de Investimento: <span>{tipoInvestimento}</span></h2>
+                        )}
+                        
+                        {rentabilidadeLiquida > 0 && (
+                            <h3> 
+                                Rentabilidade Líquida (a.a): <span> {formatarPorcentagem(rentabilidadeLiquida)} </span>
+                                <br />
+                                Período: <span>{periodoRentabilidadeLiquida} meses</span>
+                            </h3> 
+                        )}
+                        
+
+                        {isentoIR === true && (
+                            <p>Este investimento é isento de Imposto de Renda.</p>
+                        )}
+
+                    </div>
+
+                </form>
+            </div>
+        </>
     )
 }
